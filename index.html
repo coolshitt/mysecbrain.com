@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySecBrain - Your Digital Second Brain</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <h1 class="logo">MySecBrain</h1>
+                <nav class="main-nav">
+                    <button class="nav-btn active" data-module="brain">Second Brain</button>
+                    <button class="nav-btn" data-module="habits">Habits</button>
+                    <button class="nav-btn" data-module="crm">CRM</button>
+                    <button class="nav-btn" data-module="wallet">Wallet</button>
+                </nav>
+                <div class="header-actions">
+                    <button class="action-btn" id="exportData">Export</button>
+                    <button class="action-btn" id="importData">Import</button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Second Brain Module -->
+            <div class="module" id="brainModule">
+                <div class="module-header">
+                    <h2>Second Brain</h2>
+                    <button class="add-btn" id="addNote">+ Add Note</button>
+                </div>
+                <div class="content-grid">
+                    <div class="sidebar">
+                        <div class="search-box">
+                            <input type="text" id="searchNotes" placeholder="Search notes...">
+                        </div>
+                        <div class="categories">
+                            <div class="category-item active" data-category="all">All Notes</div>
+                            <div class="category-item" data-category="ideas">Ideas</div>
+                            <div class="category-item" data-category="projects">Projects</div>
+                            <div class="category-item" data-category="learning">Learning</div>
+                            <div class="category-item" data-category="personal">Personal</div>
+                        </div>
+                    </div>
+                    <div class="notes-container" id="notesContainer">
+                        <!-- Notes will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Habits Module -->
+            <div class="module hidden" id="habitsModule">
+                <div class="module-header">
+                    <h2>Habit Tracker</h2>
+                    <button class="add-btn" id="addHabit">+ Add Habit</button>
+                </div>
+                <div class="habits-grid" id="habitsGrid">
+                    <!-- Habits will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- CRM Module -->
+            <div class="module hidden" id="crmModule">
+                <div class="module-header">
+                    <h2>Task & Work CRM</h2>
+                    <button class="add-btn" id="addTask">+ Add Task</button>
+                </div>
+                <div class="crm-layout">
+                    <div class="task-columns">
+                        <div class="column" data-status="todo">
+                            <h3>To Do</h3>
+                            <div class="tasks-list" id="todoTasks"></div>
+                        </div>
+                        <div class="column" data-status="progress">
+                            <h3>In Progress</h3>
+                            <div class="tasks-list" id="progressTasks"></div>
+                        </div>
+                        <div class="column" data-status="completed">
+                            <h3>Completed</h3>
+                            <div class="tasks-list" id="completedTasks"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wallet Module -->
+            <div class="module hidden" id="walletModule">
+                <div class="module-header">
+                    <h2>Finance Wallet</h2>
+                    <button class="add-btn" id="addTransaction">+ Add Transaction</button>
+                </div>
+                <div class="wallet-overview">
+                    <div class="balance-card">
+                        <h3>Total Balance</h3>
+                        <div class="balance-amount" id="totalBalance">$0.00</div>
+                    </div>
+                </div>
+                <div class="transactions-list" id="transactionsList">
+                    <!-- Transactions will be dynamically loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Adding/Editing Items -->
+    <div class="modal" id="itemModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Item</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content based on module -->
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/data-manager.js"></script>
+    <script src="assets/js/modules/brain.js"></script>
+    <script src="assets/js/modules/habits.js"></script>
+    <script src="assets/js/modules/crm.js"></script>
+    <script src="assets/js/modules/wallet.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

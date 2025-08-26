@@ -1,0 +1,61 @@
+/* Wallet Responsive Design */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .financial-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .navigation-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .modal {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    .financial-card {
+        padding: 20px;
+    }
+    
+    .transaction-item, .budget-item, .goal-item {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .financial-amount {
+        font-size: 2rem;
+    }
+}

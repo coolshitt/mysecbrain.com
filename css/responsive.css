@@ -1,0 +1,57 @@
+/* Responsive Design for MySecBrain */
+
+/* Mobile First Approach */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .controls {
+        justify-content: center;
+    }
+    
+    .calendar-container {
+        padding: 20px;
+    }
+    
+    .month-year {
+        font-size: 1.5rem;
+    }
+    
+    .calendar-day {
+        font-size: 0.9rem;
+    }
+    
+    .modal {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 25px;
+    }
+    
+    .calendar-container {
+        padding: 25px;
+    }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1025px) {
+    .container {
+        padding: 30px;
+    }
+    
+    .calendar-container {
+        padding: 40px;
+    }
+}

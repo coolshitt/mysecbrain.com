@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySecBrain - Habit Tracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <nav class="main-nav">
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link active">Habits & Calendar</a>
+                    <a href="crm.html" class="nav-link">Project CRM</a>
+                    <a href="wallet.html" class="nav-link">Finance Wallet</a>
+                    <a href="life-analysis.html" class="nav-link">Life Analysis</a>
+                </div>
+            </nav>
+
+            <header class="header">
+                <h1 class="logo">MySecBrain</h1>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </header>
+
+            <div class="controls">
+                <button class="btn" id="prevMonth">←</button>
+                <button class="btn" id="nextMonth">→</button>
+                <button class="btn" id="exportBtn">Export</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+                <button class="btn" id="resetBtn">Reset</button>
+                <button class="btn" id="manageHabitsBtn">Manage Habits</button>
+                <a href="crm.html" class="btn btn-primary">Open CRM</a>
+            </div>
+
+            <!-- Universal Import/Export Section -->
+            <div class="universal-import-export">
+                <h3>Universal Data Management</h3>
+                <div class="data-controls">
+                    <div class="export-section">
+                        <h4>Export All Data</h4>
+                        <p>Backup your habits, calendar progress, and CRM projects/tasks</p>
+                        <button class="btn btn-primary" id="universalExportBtn">Export Everything</button>
+                    </div>
+                    <div class="import-section">
+                        <h4>Import Data</h4>
+                        <p>Restore from a previous backup or import data from another source</p>
+                        <input type="file" id="universalImportFile" accept=".json" style="display: none;">
+                        <button class="btn btn-secondary" id="universalImportBtn">Choose File</button>
+                        <span id="selectedFileName" class="file-name"></span>
+                    </div>
+                    <div class="data-info">
+                        <h4>Data Overview</h4>
+                        <div class="data-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Habits:</span>
+                                <span class="stat-value" id="habitsCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Projects:</span>
+                                <span class="stat-value" id="projectsCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Tasks:</span>
+                                <span class="stat-value" id="tasksCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Transactions:</span>
+                                <span class="stat-value" id="transactionsCount">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Budgets:</span>
+                                <span class="stat-value" id="budgetsCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h2 class="month-year" id="monthYear"></h2>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitle">Daily Habits</h3>
+                    <button class="close-btn" id="closeModal">×</button>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-label">
+                        <span>Progress</span>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="habits-list" id="habitsList"></div>
+            </div>
+        </div>
+
+        <!-- Habits Management Modal -->
+        <div class="modal-overlay" id="manageHabitsModalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Manage Habits</h3>
+                    <button class="close-btn" id="closeManageHabitsModal">×</button>
+                </div>
+                <div class="manage-habits-container">
+                    <div class="add-habit-section">
+                        <div class="input-group">
+                            <input type="text" id="newHabitInput" placeholder="Enter new habit..." class="habit-input">
+                            <button class="btn btn-primary" id="addHabitBtn">Add Habit</button>
+                        </div>
+                    </div>
+                    <div class="habits-management-list" id="habitsManagementList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/habits.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

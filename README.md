@@ -1,171 +1,211 @@
-# mysecbrain.com - Habit Tracker MVP
+# MySecBrain - Habit Tracker
 
-A modern, minimalist habit tracking application built with Next.js, featuring a calendar-based progress system and comprehensive data management.
+A modern, minimalist habit tracking application built with vanilla JavaScript, featuring a clean black & white design with light/dark mode support.
 
-## ✨ Features
+## 🏗️ Project Structure
 
-- **📅 Calendar Interface**: Visual habit tracking with color-coded days based on completion progress
-- **✅ Daily Habits Modal**: Check/uncheck habits for each day with real-time progress updates
-- **🎨 Modern Design**: Clean black & white theme with dark/light mode support
-- **💾 Data Persistence**: Local storage with Zustand for seamless state management
-- **📤 Export/Import**: Full backup and restore functionality for data portability
-- **📱 Responsive**: Mobile-friendly design that works on all devices
-- **🚀 Fast**: Built with Next.js for optimal performance
+```
+mysecbrain.com/
+├── index.html          # Main HTML file
+├── css/               # Stylesheets
+│   ├── styles.css     # Main styles and layout
+│   ├── themes.css     # Theme system (light/dark)
+│   └── responsive.css # Responsive design rules
+├── js/                # JavaScript modules
+│   ├── utils.js       # Utility functions
+│   ├── storage.js     # Data persistence layer
+│   ├── calendar.js    # Calendar management
+│   ├── habits.js      # Habits and progress tracking
+│   └── app.js         # Main application controller
+└── README.md          # This file
+```
 
-## 🛠️ Tech Stack
+## 🚀 Features
 
-- **Frontend**: Next.js 15 + React + TypeScript
-- **Styling**: Tailwind CSS with custom black/white palette
-- **State Management**: Zustand with persistence
-- **Date Handling**: date-fns for calendar operations
-- **Deployment**: Vercel (recommended)
+- **Interactive Calendar**: Click any day to manage habits
+- **Progress Tracking**: Visual indicators and progress bars
+- **Data Persistence**: All data saved locally using localStorage
+- **Export/Import**: Backup and restore functionality
+- **Theme Toggle**: Light/dark mode with smooth transitions
+- **Responsive Design**: Works perfectly on all devices
+- **Modular Architecture**: Clean, maintainable code structure
 
-## 🚀 Quick Start
+## 🎯 Core Modules
+
+### 1. **Utils** (`js/utils.js`)
+Utility functions for common operations:
+- Date formatting and manipulation
+- Progress calculations
+- File download utilities
+- Alert and confirmation dialogs
+
+### 2. **Storage** (`js/storage.js`)
+Data persistence layer:
+- localStorage management with prefixing
+- Error handling and fallbacks
+- Storage size monitoring
+- Default data management
+
+### 3. **Calendar** (`js/calendar.js`)
+Calendar rendering and navigation:
+- Month navigation (previous/next)
+- Date selection handling
+- Progress indicator management
+- Responsive grid layout
+
+### 4. **Habits** (`js/habits.js`)
+Habit management and tracking:
+- Habit CRUD operations
+- Completion status tracking
+- Progress calculations
+- Modal management
+
+### 5. **App** (`js/app.js`)
+Main application controller:
+- Module coordination
+- Event handling
+- Theme management
+- Data import/export
+
+## 🛠️ Development
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+- Modern web browser with ES6+ support
+- No build tools required (vanilla JavaScript)
 
-### Installation
+### Local Development
+1. Clone the repository
+2. Open `index.html` in your browser
+3. Start developing!
 
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd mysecbrain.com
-   ```
+### Adding New Modules
+The modular structure makes it easy to add new features:
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+1. **Create a new module file** in `js/` directory
+2. **Add the script tag** to `index.html`
+3. **Initialize the module** in `app.js`
+4. **Set up callbacks** for module communication
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+### Example: Adding a Notes Module
+```javascript
+// js/notes.js
+class NotesManager {
+    constructor() {
+        this.notes = {};
+    }
+    
+    addNote(date, note) {
+        // Implementation
+    }
+}
 
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+// In app.js
+this.notes = new NotesManager();
+```
 
-## 📱 Usage
+## 🎨 Styling
 
-### Creating Habits
-1. Use the "Manage Habits" sidebar to add new habits
-2. Enter habit names and click "Add Habit"
-3. Edit or delete existing habits as needed
+### CSS Architecture
+- **`styles.css`**: Core layout and component styles
+- **`themes.css`**: CSS variables and theme switching
+- **`responsive.css`**: Mobile-first responsive design
 
-### Tracking Daily Progress
-1. Click on any calendar day to open the habits modal
-2. Check/uncheck completed habits for that day
-3. Watch the calendar colors update in real-time
-4. Progress percentage automatically calculates
+### Design System
+- **Colors**: Strictly black, white, and grayscale
+- **Typography**: System font stack for optimal performance
+- **Spacing**: Consistent 8px grid system
+- **Transitions**: Smooth 0.3s ease animations
 
-### Data Management
-- **Export**: Download a JSON backup of all your data
-- **Import**: Restore from a previously exported backup file
-- **Format**: Compatible with future modules (CRM, Wallet, Notebook)
+## 📱 Responsive Design
 
-### Theme Switching
-- Click the theme toggle button (top-right corner)
-- Automatically saves your preference
-- Respects system dark/light mode preference
+- **Mobile First**: Designed for mobile devices first
+- **Breakpoints**: 768px (mobile), 1024px (tablet), 1025px+ (desktop)
+- **Touch Friendly**: Optimized for touch interactions
+- **Flexible Layout**: Adapts to all screen sizes
 
-## 🎨 Design System
+## 💾 Data Management
 
-### Color Palette
-- **Primary Colors**: Black (#000000) to White (#FFFFFF) with gray scales
-- **Habit Progress**: 
-  - 0%: Black (#000000)
-  - 25%: Dark Gray (#404040)
-  - 50%: Medium Gray (#737373)
-  - 75%: Light Gray (#a3a3a3)
-  - 100%: White (#FFFFFF)
+### Storage Structure
+```javascript
+{
+    "mysecbrain_habits": ["habit1", "habit2", ...],
+    "mysecbrain_completions": {
+        "2024-01-01": [true, false, true, ...],
+        "2024-01-02": [false, true, false, ...]
+    },
+    "mysecbrain_theme": "light"
+}
+```
 
-### Typography
-- **Font**: Inter (system fallbacks)
-- **Weights**: Regular, Medium, Semibold, Bold
-- **Responsive**: Scales appropriately across devices
+### Export/Import
+- **Export**: Downloads JSON file with all data
+- **Import**: Restores data from JSON file
+- **Validation**: Ensures data integrity
+- **Backup**: Easy data backup and restoration
+
+## 🔧 Customization
+
+### Adding New Habits
+Edit the `DEFAULT_HABITS` array in `js/storage.js`:
+```javascript
+const DEFAULT_HABITS = [
+    'Exercise for 30 minutes',
+    'Read for 20 minutes',
+    'Your new habit here',
+    // ... more habits
+];
+```
+
+### Theme Customization
+Modify CSS variables in `css/themes.css`:
+```css
+:root {
+    --bg-primary: #ffffff;
+    --accent-color: #000000;
+    /* ... more variables */
+}
+```
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy with one click
-4. Configure custom domain (mysecbrain.com)
+### Static Hosting
+The app is ready for any static hosting service:
+- **GitHub Pages**: Push to repository and enable Pages
+- **Vercel**: Connect repository for automatic deployment
+- **Netlify**: Drag and drop deployment
+- **Traditional Hosting**: Upload files to web server
 
-### Other Platforms
-- **Netlify**: Compatible with Next.js
-- **Railway**: Good for full-stack deployments
-- **Self-hosted**: Docker support available
+### Domain Configuration
+Point your domain (mysecbrain.com) to the hosting service of your choice.
 
-## 🔧 Development
+## 🔮 Future Enhancements
 
-### Project Structure
-```
-src/
-├── app/                 # Next.js app directory
-│   ├── page.tsx        # Main application page
-│   ├── layout.tsx      # Root layout
-│   └── globals.css     # Global styles
-├── components/         # React components
-│   ├── HabitCalendar.tsx    # Calendar grid
-│   ├── HabitModal.tsx       # Daily habits modal
-│   ├── HabitManager.tsx     # Habit CRUD operations
-│   ├── DataManager.tsx      # Export/Import functionality
-│   └── ThemeToggle.tsx      # Dark/light mode toggle
-└── lib/               # Utilities and stores
-    └── store.ts       # Zustand habit store
-```
-
-### Available Scripts
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## 🎯 Roadmap
-
-### Phase 1 (Current - MVP) ✅
-- [x] Habit tracking with calendar interface
-- [x] Dark/light theme support
-- [x] Export/import functionality
-- [x] Responsive design
-
-### Phase 2 (Future)
-- [ ] CRM Module
-- [ ] Wallet/Finance Tracker
-- [ ] Notebook/Notes System
-- [ ] User authentication
-- [ ] Cloud sync
-
-### Phase 3 (Advanced)
-- [ ] Habit streaks and analytics
-- [ ] Social features and sharing
-- [ ] Mobile app (React Native)
-- [ ] API for third-party integrations
+The modular architecture makes it easy to add:
+- **Notes Module**: Daily journaling and notes
+- **Goals Module**: Long-term goal tracking
+- **Analytics Module**: Progress insights and statistics
+- **Social Module**: Share progress with friends
+- **Reminders Module**: Push notifications and reminders
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open source and available under the MIT License.
 
-## 🙏 Acknowledgments
+## 🆘 Support
 
-- Built with [Next.js](https://nextjs.org/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- State management with [Zustand](https://github.com/pmndrs/zustand)
-- Date utilities from [date-fns](https://date-fns.org/)
+For questions or issues:
+1. Check the code comments for implementation details
+2. Review the modular structure for understanding
+3. Open an issue on GitHub
 
 ---
 
-**Built with ❤️ for productivity enthusiasts**
-
-*mysecbrain.com - Your Personal Productivity Hub*
+**Built with ❤️ for better habit tracking and personal development.**

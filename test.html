@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .btn { padding: 10px 20px; margin: 10px; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+    <h1>CRM Test</h1>
+    <button id="addProjectBtn" class="btn">+ New Project</button>
+    <button id="addTaskBtn" class="btn">+ New Task</button>
+    
+    <div id="projectModalOverlay" class="overlay">
+        <div class="modal">
+            <h3>New Project</h3>
+            <input type="text" id="projectName" placeholder="Project Name">
+            <button onclick="closeProjectModal()">Close</button>
+        </div>
+    </div>
+    
+    <div id="taskModalOverlay" class="overlay">
+        <div class="modal">
+            <h3>New Task</h3>
+            <input type="text" id="taskName" placeholder="Task Name">
+            <button onclick="closeTaskModal()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple CRM test
+        function openProjectModal() {
+            console.log('Opening project modal');
+            document.getElementById('projectModalOverlay').style.display = 'block';
+        }
+        
+        function openTaskModal() {
+            console.log('Opening task modal');
+            document.getElementById('taskModalOverlay').style.display = 'block';
+        }
+        
+        function closeProjectModal() {
+            document.getElementById('projectModalOverlay').style.display = 'none';
+        }
+        
+        function closeTaskModal() {
+            document.getElementById('taskModalOverlay').style.display = 'none';
+        }
+        
+        // Event listeners
+        document.getElementById('addProjectBtn').addEventListener('click', () => {
+            console.log('Project button clicked');
+            openProjectModal();
+        });
+        
+        document.getElementById('addTaskBtn').addEventListener('click', () => {
+            console.log('Task button clicked');
+            openTaskModal();
+        });
+        
+        // Close modals when clicking overlay
+        document.getElementById('projectModalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeProjectModal();
+        });
+        
+        document.getElementById('taskModalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeTaskModal();
+        });
+        
+        console.log('Test page loaded');
+    </script>
+</body>
+</html>

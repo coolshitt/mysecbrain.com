@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySecBrain Wallet - Finance Tracker</title>
+    <link rel="stylesheet" href="css/wallet-styles.css">
+    <link rel="stylesheet" href="css/wallet-themes.css">
+    <link rel="stylesheet" href="css/wallet-responsive.css">
+</head>
+<body>
+    <button class="btn theme-toggle" id="themeToggle">🌙</button>
+    
+    <div class="container">
+        <div class="navigation-header">
+            <a href="index.html" class="back-link">← Back to MySecBrain</a>
+            <h2 class="page-title">Personal Finance & Wallet</h2>
+        </div>
+        
+        <div class="header">
+            <h1>Personal Finance Tracker</h1>
+            <p>Track income, expenses, budgets, and financial goals</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-success" id="addIncomeBtn">+ Add Income</button>
+            <button class="btn btn-danger" id="addExpenseBtn">+ Add Expense</button>
+            <button class="btn btn-info" id="addBudgetBtn">+ Add Budget</button>
+            <button class="btn btn-primary" id="addGoalBtn">+ Add Goal</button>
+            <button class="btn btn-secondary" id="exportBtn">Export Data</button>
+            <button class="btn btn-danger" id="resetBtn">Reset All</button>
+        </div>
+
+        <!-- Financial Overview -->
+        <div class="financial-overview">
+            <div class="financial-card balance">
+                <h3>Current Balance</h3>
+                <div class="financial-amount neutral" id="currentBalance">$0.00</div>
+            </div>
+            <div class="financial-card income">
+                <h3>Total Income</h3>
+                <div class="financial-amount positive" id="totalIncome">$0.00</div>
+            </div>
+            <div class="financial-card expense">
+                <h3>Total Expenses</h3>
+                <div class="financial-amount negative" id="totalExpenses">$0.00</div>
+            </div>
+            <div class="financial-card savings">
+                <h3>Net Savings</h3>
+                <div class="financial-amount neutral" id="netSavings">$0.00</div>
+            </div>
+        </div>
+
+        <!-- Transactions Section -->
+        <div class="transactions-container">
+            <h3>Recent Transactions</h3>
+            <div class="transactions-list" id="transactionsList">
+                <div class="empty-state">
+                    <h4>No transactions yet</h4>
+                    <p>Add your first income or expense to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budgets Section -->
+        <div class="budgets-container">
+            <h3>Budget Categories</h3>
+            <div class="budgets-list" id="budgetsList">
+                <div class="empty-state">
+                    <h4>No budgets set yet</h4>
+                    <p>Create budget categories to track your spending!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Goals Section -->
+        <div class="goals-container">
+            <h3>Financial Goals</h3>
+            <div class="goals-list" id="goalsList">
+                <div class="empty-state">
+                    <h4>No financial goals yet</h4>
+                    <p>Set savings goals to stay motivated!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Income Modal -->
+    <div class="modal-overlay" id="incomeModalOverlay">
+        <div class="modal">
+            <h3>Add Income</h3>
+            <form class="income-form" id="incomeForm">
+                <div class="form-group">
+                    <label for="incomeTitle">Income Title *</label>
+                    <input type="text" id="incomeTitle" class="form-input" placeholder="e.g., Salary, Freelance, Bonus" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeAmount">Amount ($) *</label>
+                    <input type="number" id="incomeAmount" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeCategory">Category</label>
+                    <select id="incomeCategory" class="form-input">
+                        <option value="salary">Salary</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="investment">Investment</option>
+                        <option value="bonus">Bonus</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="incomeDate">Date</label>
+                    <input type="date" id="incomeDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="incomeNotes">Notes</label>
+                    <textarea id="incomeNotes" class="form-input" placeholder="Additional notes..." rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelIncomeBtn">Cancel</button>
+                    <button type="submit" class="btn btn-success">Add Income</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Expense Modal -->
+    <div class="modal-overlay" id="expenseModalOverlay">
+        <div class="modal">
+            <h3>Add Expense</h3>
+            <form class="expense-form" id="expenseForm">
+                <div class="form-group">
+                    <label for="expenseTitle">Expense Title *</label>
+                    <input type="text" id="expenseTitle" class="form-input" placeholder="e.g., Groceries, Rent, Utilities" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseAmount">Amount ($) *</label>
+                    <input type="number" id="expenseAmount" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <select id="expenseCategory" class="form-input">
+                        <option value="food">Food & Dining</option>
+                        <option value="housing">Housing</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expenseDate">Date</label>
+                    <input type="date" id="expenseDate" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="expenseNotes">Notes</label>
+                    <textarea id="expenseNotes" class="form-input" placeholder="Additional notes..." rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelExpenseBtn">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Add Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Budget Modal -->
+    <div class="modal-overlay" id="budgetModalOverlay">
+        <div class="modal">
+            <h3>Add Budget Category</h3>
+            <form class="budget-form" id="budgetForm">
+                <div class="form-group">
+                    <label for="budgetTitle">Budget Title *</label>
+                    <input type="text" id="budgetTitle" class="form-input" placeholder="e.g., Groceries, Entertainment" required>
+                </div>
+                <div class="form-group">
+                    <label for="budgetAmount">Monthly Limit ($) *</label>
+                    <input type="number" id="budgetAmount" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="budgetCategory">Category</label>
+                    <select id="budgetCategory" class="form-input">
+                        <option value="food">Food & Dining</option>
+                        <option value="housing">Housing</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budgetNotes">Notes</label>
+                    <textarea id="budgetNotes" class="form-input" placeholder="Budget notes..." rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBudgetBtn">Cancel</button>
+                    <button type="submit" class="btn btn-info">Add Budget</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Goal Modal -->
+    <div class="modal-overlay" id="goalModalOverlay">
+        <div class="modal">
+            <h3>Add Financial Goal</h3>
+            <form class="goal-form" id="goalForm">
+                <div class="form-group">
+                    <label for="goalTitle">Goal Title *</label>
+                    <input type="text" id="goalTitle" class="form-input" placeholder="e.g., Emergency Fund, Vacation, House Down Payment" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalTarget">Target Amount ($) *</label>
+                    <input type="number" id="goalTarget" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="goalCurrent">Current Amount ($)</label>
+                    <input type="number" id="goalCurrent" class="form-input" placeholder="0.00" min="0" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="goalDeadline">Target Date</label>
+                    <input type="date" id="goalDeadline" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="goalNotes">Notes</label>
+                    <textarea id="goalNotes" class="form-input" placeholder="Goal description..." rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelGoalBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Goal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/wallet-storage.js"></script>
+    <script src="js/wallet-transactions.js"></script>
+    <script src="js/wallet-budgets.js"></script>
+    <script src="js/wallet-goals.js"></script>
+    <script src="js/wallet-app.js"></script>
+</body>
+</html>

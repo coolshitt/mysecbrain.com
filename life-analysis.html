@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySecBrain Life Analysis - Progress Tracker</title>
+    <link rel="stylesheet" href="css/life-analysis-styles.css">
+    <link rel="stylesheet" href="css/life-analysis-themes.css">
+    <link rel="stylesheet" href="css/life-analysis-responsive.css">
+</head>
+<body>
+    <button class="btn theme-toggle" id="themeToggle">🌙</button>
+    
+    <div class="container">
+        <div class="navigation-header">
+            <a href="index.html" class="back-link">← Back to MySecBrain</a>
+            <h2 class="page-title">Life Analysis & Progress Tracker</h2>
+        </div>
+        
+        <div class="header">
+            <h1>Life Analysis Dashboard</h1>
+            <p>Track your daily progress, weekly achievements, and monthly growth across all areas of life</p>
+        </div>
+
+        <!-- Debug Section -->
+        <div class="debug-section" style="background: var(--bg-primary); padding: 20px; border-radius: 12px; margin-bottom: 30px; border: 2px solid var(--border-color);">
+            <h3 style="color: var(--text-primary); margin-bottom: 15px;">🔍 Debug Information</h3>
+            <div id="debugInfo" style="color: var(--text-secondary); font-family: monospace; font-size: 12px;">
+                Loading debug information...
+            </div>
+            <div style="margin-top: 15px;">
+                <button class="btn btn-secondary" onclick="window.lifeAnalysisApp.refreshAllData()" style="margin-right: 10px;">
+                    🔄 Force Refresh
+                </button>
+                <button class="btn btn-secondary" onclick="scanLocalStorage()" style="margin-right: 10px;">
+                    🔍 Scan All Data
+                </button>
+                <button class="btn btn-secondary" onclick="testMainAppData()">
+                    🧪 Test Main App
+                </button>
+            </div>
+        </div>
+
+        <!-- Time Period Selector -->
+        <div class="time-selector">
+            <button class="btn btn-primary active" id="dailyBtn">Daily</button>
+            <button class="btn btn-secondary" id="weeklyBtn">Weekly</button>
+            <button class="btn btn-secondary" id="monthlyBtn">Monthly</button>
+            <button class="btn btn-secondary" id="yearlyBtn">Yearly</button>
+        </div>
+
+        <!-- Progress Overview Cards -->
+        <div class="progress-overview">
+            <div class="progress-card life">
+                <h3>Life Progress</h3>
+                <div class="progress-circle" id="lifeProgress">
+                    <span class="progress-number">0%</span>
+                </div>
+                <div class="progress-stats">
+                    <span class="completed">0</span> / <span class="total">0</span> completed
+                </div>
+            </div>
+            
+            <div class="progress-card projects">
+                <h3>Projects Progress</h3>
+                <div class="progress-circle" id="projectsProgress">
+                    <span class="progress-number">0%</span>
+                </div>
+                <div class="progress-stats">
+                    <span class="completed">0</span> / <span class="total">0</span> completed
+                </div>
+            </div>
+            
+            <div class="progress-card finances">
+                <h3>Financial Health</h3>
+                <div class="progress-circle" id="financesProgress">
+                    <span class="progress-number">0%</span>
+                </div>
+                <div class="progress-stats">
+                    <span class="balance">$0.00</span> balance
+                </div>
+            </div>
+            
+            <div class="progress-card goals">
+                <h3>Goals Achievement</h3>
+                <div class="progress-circle" id="goalsProgress">
+                    <span class="progress-number">0%</span>
+                </div>
+                <div class="progress-stats">
+                    <span class="completed">0</span> / <span class="total">0</span> achieved
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="activity-section">
+            <div class="section-header">
+                <h3>Activity Timeline</h3>
+                <button class="btn btn-primary" id="addActivityBtn">+ Add Activity</button>
+            </div>
+            <div class="activity-timeline" id="activityTimeline">
+                <div class="empty-state">
+                    <h4>No activities recorded yet</h4>
+                    <p>Start tracking your daily activities to see your progress!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Charts -->
+        <div class="charts-section">
+            <div class="chart-container">
+                <h3>Life Consistency</h3>
+                <div class="chart" id="lifeChart">
+                    <div class="chart-placeholder">Chart will be displayed here</div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h3>Project Completion</h3>
+                <div class="chart" id="projectsChart">
+                    <div class="chart-placeholder">Chart will be displayed here</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights & Analytics -->
+        <div class="insights-section">
+            <h3>Life Insights & Analytics</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4>Most Productive Day</h4>
+                    <div class="insight-value" id="mostProductiveDay">-</div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>Best Habit Streak</h4>
+                    <div class="insight-value" id="bestHabitStreak">-</div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>Financial Growth</h4>
+                    <div class="insight-value" id="financialGrowth">-</div>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>Goal Completion Rate</h4>
+                    <div class="insight-value" id="goalCompletionRate">-</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export & Settings -->
+        <div class="actions-section">
+            <button class="btn btn-primary" id="exportReportBtn">Export Life Report</button>
+            <button class="btn btn-secondary" id="settingsBtn">Analysis Settings</button>
+            <button class="btn btn-danger" id="resetDataBtn">Reset Analysis Data</button>
+        </div>
+    </div>
+
+    <!-- Add Activity Modal -->
+    <div class="modal-overlay" id="activityModalOverlay">
+        <div class="modal">
+            <h3>Add New Activity</h3>
+            <form class="activity-form" id="activityForm">
+                <div class="form-group">
+                    <label for="activityTitle">Activity Title *</label>
+                    <input type="text" id="activityTitle" class="form-input" placeholder="e.g., Completed project milestone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityCategory">Category</label>
+                    <select id="activityCategory" class="form-input">
+                        <option value="habits">Habits & Personal</option>
+                        <option value="work">Work & Projects</option>
+                        <option value="finance">Finance & Money</option>
+                        <option value="health">Health & Fitness</option>
+                        <option value="learning">Learning & Growth</option>
+                        <option value="social">Social & Relationships</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityDate">Date & Time</label>
+                    <input type="datetime-local" id="activityDate" class="form-input">
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityDuration">Duration (minutes)</label>
+                    <input type="number" id="activityDuration" class="form-input" placeholder="0" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityMood">Mood/Energy Level</label>
+                    <select id="activityMood" class="form-input">
+                        <option value="5">😊 Excellent (5)</option>
+                        <option value="4">🙂 Good (4)</option>
+                        <option value="3">😐 Neutral (3)</option>
+                        <option value="2">😕 Fair (2)</option>
+                        <option value="1">😞 Poor (1)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="activityNotes">Notes & Reflection</label>
+                    <textarea id="activityNotes" class="form-input" placeholder="What did you learn? How did you feel?" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelActivityBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/life-analysis-storage.js"></script>
+    <script src="js/life-analysis-activities.js"></script>
+    <script src="js/life-analysis-progress.js"></script>
+    <script src="js/life-analysis-charts.js"></script>
+    <script src="js/life-analysis-insights.js"></script>
+    <script src="js/life-analysis-app.js"></script>
+    
+    <script>
+        // Debug function to show module status
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debugInfo');
+            if (!debugInfo) return;
+            
+            const info = {
+                timestamp: new Date().toLocaleString(),
+                modules: {
+                    'Main App': !!window.app,
+                    'CRM Module': !!window.crmApp,
+                    'Wallet Module': !!window.walletApp,
+                    'Life Analysis App': !!window.lifeAnalysisApp
+                },
+                localStorage: {
+                    'habits': localStorage.getItem('habits') ? JSON.parse(localStorage.getItem('habits')).length : 0,
+                    'habit_completions': localStorage.getItem('habit_completions') ? Object.keys(JSON.parse(localStorage.getItem('habit_completions'))).length : 0,
+                    'crm_projects': localStorage.getItem('crm_projects') ? JSON.parse(localStorage.getItem('crm_projects')).length : 0,
+                    'crm_tasks': localStorage.getItem('crm_tasks') ? JSON.parse(localStorage.getItem('crm_tasks')).length : 0,
+                    'wallet_transactions': localStorage.getItem('wallet_transactions') ? JSON.parse(localStorage.getItem('wallet_transactions')).length : 0,
+                    'wallet_budgets': localStorage.getItem('wallet_budgets') ? JSON.parse(localStorage.getItem('wallet_budgets')).length : 0,
+                    'wallet_goals': localStorage.getItem('wallet_goals') ? JSON.parse(localStorage.getItem('wallet_goals')).length : 0
+                }
+            };
+            
+            debugInfo.innerHTML = `
+                <strong>Module Status:</strong><br>
+                Main App: ${info.modules['Main App'] ? '✅ Available' : '❌ Not Available'}<br>
+                CRM Module: ${info.modules['CRM Module'] ? '✅ Available' : '❌ Not Available'}<br>
+                Wallet Module: ${info.modules['Wallet Module'] ? '✅ Available' : '❌ Not Available'}<br>
+                Life Analysis App: ${info.modules['Life Analysis App'] ? '✅ Available' : '❌ Not Available'}<br><br>
+                
+                <strong>LocalStorage Data:</strong><br>
+                Habits: ${info.localStorage.habits} items<br>
+                Habit Completions: ${info.localStorage.habit_completions} days<br>
+                CRM Projects: ${info.localStorage.crm_projects} items<br>
+                CRM Tasks: ${info.localStorage.crm_tasks} items<br>
+                Wallet Transactions: ${info.localStorage.wallet_transactions} items<br>
+                Wallet Budgets: ${info.localStorage.wallet_budgets} items<br>
+                Wallet Goals: ${info.localStorage.wallet_goals} items<br><br>
+                
+                <strong>Last Updated:</strong> ${info.timestamp}
+            `;
+        }
+        
+        // Comprehensive localStorage scanner
+        function scanLocalStorage() {
+            const debugInfo = document.getElementById('debugInfo');
+            if (!debugInfo) return;
+            
+            console.log('🔍 Starting comprehensive localStorage scan...');
+            
+            const allKeys = Object.keys(localStorage);
+            const potentialHabitKeys = [];
+            const allData = {};
+            
+            // Check for mysecbrain_ prefixed keys first
+            const mysecbrainKeys = allKeys.filter(key => key.startsWith('mysecbrain_'));
+            console.log('🔍 MySecBrain keys found:', mysecbrainKeys);
+            
+            allKeys.forEach(key => {
+                try {
+                    const data = localStorage.getItem(key);
+                    const parsed = JSON.parse(data);
+                    allData[key] = {
+                        type: Array.isArray(parsed) ? 'array' : typeof parsed,
+                        length: Array.isArray(parsed) ? parsed.length : 'N/A',
+                        sample: Array.isArray(parsed) && parsed.length > 0 ? parsed[0] : parsed
+                    };
+                    
+                    // Check if this might be habits data
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        const firstItem = parsed[0];
+                        if (firstItem && (
+                            firstItem.name || 
+                            firstItem.title || 
+                            firstItem.habit || 
+                            firstItem.description ||
+                            key.toLowerCase().includes('habit') ||
+                            key.toLowerCase().includes('daily') ||
+                            key.toLowerCase().includes('routine') ||
+                            key.toLowerCase().includes('task') ||
+                            key.toLowerCase().includes('activity')
+                        )) {
+                            potentialHabitKeys.push({
+                                key: key,
+                                count: parsed.length,
+                                sample: firstItem
+                            });
+                        }
+                    }
+                } catch (e) {
+                    allData[key] = {
+                        type: 'string',
+                        length: data ? data.length : 0,
+                        sample: data ? data.substring(0, 100) : 'empty'
+                    };
+                }
+            });
+            
+            console.log('📊 All localStorage data:', allData);
+            console.log('🎯 Potential habits data:', potentialHabitKeys);
+            
+            // Update debug info with scan results
+            let scanResults = `
+                <strong>🔍 LocalStorage Scan Results:</strong><br><br>
+                
+                <strong>Total Keys Found:</strong> ${allKeys.length}<br>
+                <strong>MySecBrain Keys:</strong> ${mysecbrainKeys.length}<br><br>
+                
+                <strong>🔑 MySecBrain Keys Found:</strong><br>
+            `;
+            
+            if (mysecbrainKeys.length > 0) {
+                mysecbrainKeys.forEach(key => {
+                    try {
+                        const data = localStorage.getItem(key);
+                        const parsed = JSON.parse(data);
+                        const type = Array.isArray(parsed) ? 'array' : typeof parsed;
+                        const length = Array.isArray(parsed) ? parsed.length : 'N/A';
+                        scanResults += `• <strong>${key}</strong>: ${type} (${length})<br>`;
+                    } catch (e) {
+                        scanResults += `• <strong>${key}</strong>: string<br>`;
+                    }
+                });
+            } else {
+                scanResults += '❌ No MySecBrain keys found<br>';
+            }
+            
+            scanResults += `<br><strong>🎯 Potential Habits Data:</strong><br>`;
+            
+            if (potentialHabitKeys.length > 0) {
+                potentialHabitKeys.forEach(item => {
+                    scanResults += `
+                        • <strong>${item.key}</strong>: ${item.count} items<br>
+                          Sample: ${JSON.stringify(item.sample).substring(0, 100)}...<br><br>
+                    `;
+                });
+            } else {
+                scanResults += '❌ No potential habits data found<br><br>';
+            }
+            
+            scanResults += `
+                <strong>📊 All Data Summary:</strong><br>
+            `;
+            
+            Object.entries(allData).forEach(([key, info]) => {
+                scanResults += `• <strong>${key}</strong>: ${info.type} (${info.length})<br>`;
+            });
+            
+            scanResults += `<br><strong>Scan completed at:</strong> ${new Date().toLocaleString()}`;
+            
+            debugInfo.innerHTML = scanResults;
+        }
+        
+        // Update debug info every 5 seconds
+        setInterval(updateDebugInfo, 5000);
+        
+        // Initial update
+        setTimeout(updateDebugInfo, 1000);
+
+        // Test data fetching from main app
+        function testMainAppData() {
+            const debugInfo = document.getElementById('debugInfo');
+            if (!debugInfo) return;
+            
+            console.log('🧪 Testing main app data fetching...');
+            
+            let testResults = `
+                <strong>🧪 Main App Data Test:</strong><br><br>
+            `;
+            
+            // Test window.app
+            if (window.app) {
+                testResults += `✅ <strong>window.app</strong> is available<br>`;
+                
+                if (window.app.habitsManager) {
+                    testResults += `✅ <strong>window.app.habitsManager</strong> is available<br>`;
+                    try {
+                        const habits = window.app.habitsManager.getHabits();
+                        const completions = window.app.habitsManager.getCompletions();
+                        testResults += `📊 Habits: ${habits.length} items<br>`;
+                        testResults += `📊 Completions: ${Object.keys(completions).length} days<br>`;
+                    } catch (e) {
+                        testResults += `❌ Error getting habits: ${e.message}<br>`;
+                    }
+                } else {
+                    testResults += `❌ <strong>window.app.habitsManager</strong> is NOT available<br>`;
+                }
+                
+                if (window.app.habits) {
+                    testResults += `✅ <strong>window.app.habits</strong> is available (${window.app.habits.length} items)<br>`;
+                } else {
+                    testResults += `❌ <strong>window.app.habits</strong> is NOT available<br>`;
+                }
+            } else {
+                testResults += `❌ <strong>window.app</strong> is NOT available<br>`;
+            }
+            
+            // Test window.habitsManager
+            if (window.habitsManager) {
+                testResults += `✅ <strong>window.habitsManager</strong> is available<br>`;
+                try {
+                    const habits = window.habitsManager.getHabits();
+                    const completions = window.habitsManager.getCompletions();
+                    testResults += `📊 Habits: ${habits.length} items<br>`;
+                    testResults += `📊 Completions: ${Object.keys(completions).length} days<br>`;
+                } catch (e) {
+                    testResults += `❌ Error getting habits: ${e.message}<br>`;
+                }
+            } else {
+                testResults += `❌ <strong>window.habitsManager</strong> is NOT available<br>`;
+            }
+            
+            // Test localStorage directly
+            testResults += `<br><strong>🔍 Direct localStorage Test:</strong><br>`;
+            
+            const mysecbrainHabits = localStorage.getItem('mysecbrain_habits');
+            const mysecbrainCompletions = localStorage.getItem('mysecbrain_completions');
+            
+            if (mysecbrainHabits) {
+                try {
+                    const habits = JSON.parse(mysecbrainHabits);
+                    testResults += `✅ <strong>mysecbrain_habits</strong>: ${habits.length} items<br>`;
+                } catch (e) {
+                    testResults += `❌ <strong>mysecbrain_habits</strong>: Parse error<br>`;
+                }
+            } else {
+                testResults += `❌ <strong>mysecbrain_habits</strong>: Not found<br>`;
+            }
+            
+            if (mysecbrainCompletions) {
+                try {
+                    const completions = JSON.parse(mysecbrainCompletions);
+                    testResults += `✅ <strong>mysecbrain_completions</strong>: ${Object.keys(completions).length} days<br>`;
+                } catch (e) {
+                    testResults += `❌ <strong>mysecbrain_completions</strong>: Parse error<br>`;
+                }
+            } else {
+                testResults += `❌ <strong>mysecbrain_completions</strong>: Not found<br>`;
+            }
+            
+            testResults += `<br><strong>Test completed at:</strong> ${new Date().toLocaleString()}`;
+            
+            debugInfo.innerHTML = testResults;
+        }
+    </script>
+</body>
+</html>

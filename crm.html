@@ -784,6 +784,480 @@
                 font-size: 11px;
             }
         }
+
+        /* Time Tracking Clock Styles */
+        .time-tracking-container {
+            background: var(--bg-primary);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 2px solid var(--border-color);
+        }
+
+        .time-tracking-container h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .time-tracker {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .timer-display {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+        }
+
+        .timer-time {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+        }
+
+        .timer-status {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .task-selection {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+
+        .task-select-field {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .estimated-time-input {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 200px;
+        }
+
+        .estimated-time-input label {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .time-input-field {
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .time-input-field:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+        }
+
+        .timer-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .current-task-info {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+        }
+
+        .current-task-info h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .task-tracking-details p {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .task-tracking-details strong {
+            color: var(--text-primary);
+        }
+
+        /* Timer States */
+        .timer-display.tracking {
+            border: 3px solid var(--accent-color);
+            background-color: var(--bg-secondary);
+            animation: pulse 2s infinite;
+        }
+
+        .timer-display.paused {
+            border: 3px solid var(--text-secondary);
+            background-color: var(--bg-secondary);
+        }
+
+        .timer-display.ready {
+            border: 3px solid var(--border-color);
+            background-color: var(--bg-primary);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+        }
+
+        .timer-status {
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .timer-status:contains("Tracking") {
+            background-color: var(--accent-color);
+            color: var(--bg-primary);
+        }
+
+        .timer-status:contains("paused") {
+            background-color: var(--text-secondary);
+            color: var(--bg-primary);
+        }
+
+        /* Responsive Design for Timer */
+        @media (max-width: 768px) {
+            .timer-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .estimated-time-input {
+                min-width: auto;
+            }
+
+            .timer-buttons {
+                justify-content: center;
+            }
+
+            .timer-time {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Completion Log Styles */
+        .completion-log-container {
+            background: var(--bg-primary);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 2px solid var(--border-color);
+        }
+
+        .completion-log-container h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .completion-log {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .completion-log-item {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .completion-log-item:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .completion-log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .completion-task-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .completion-project-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .completion-time-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .time-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .time-info-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .time-info-value {
+            font-size: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .completion-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+
+        .completion-time {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        .new-badge {
+            background-color: var(--accent-color);
+            color: var(--bg-primary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+            display: inline-block;
+        }
+
+        .completion-log-item.recent-completion {
+            border-left: 4px solid var(--accent-color);
+            background-color: var(--bg-secondary);
+        }
+
+        .completion-log-item.recent-completion .completion-task-name {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .completion-log-item.recent-completion .completion-time-info .time-info-value {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .completion-log-item.recent-completion .completion-time-info .time-info-value.over-estimate {
+            color: var(--text-secondary);
+        }
+
+        .completion-log-item.recent-completion .completion-time-info .time-info-value.under-estimate {
+            color: var(--accent-color);
+        }
+
+        .over-estimate {
+            color: var(--text-secondary) !important;
+        }
+
+        .under-estimate {
+            color: var(--accent-color) !important;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-state h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .simple-timer {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .simple-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .simple-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .simple-task-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .simple-task-info h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .task-details p {
+            margin: 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .task-details strong {
+            color: var(--text-primary);
+        }
+
+        /* Subtasks Styles */
+        .subtasks-container {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px;
+            background: var(--bg-secondary);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .subtask-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .subtask-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .subtask-input {
+            flex: 2;
+            min-width: 0;
+        }
+
+        .subtask-time {
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .remove-subtask {
+            padding: 5px 8px;
+            font-size: 12px;
+            min-width: auto;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        #addSubtaskBtn {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Task display with subtasks */
+        .task-with-subtasks {
+            border-left: 3px solid var(--border-color);
+            padding-left: 15px;
+            margin-left: 10px;
+        }
+
+        .subtasks-list {
+            margin-top: 10px;
+            padding-left: 15px;
+        }
+
+        .subtask-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .subtask-display:last-child {
+            border-bottom: none;
+        }
+
+        .subtask-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .subtask-status {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+        }
+
+        .subtask-status.completed {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+        }
     </style>
 </head>
 <body>
@@ -822,6 +1296,76 @@
             <div class="earnings-card">
                 <h3>Completed Tasks</h3>
                 <div class="earnings-amount" id="completedTasks">0</div>
+            </div>
+        </div>
+
+        <!-- Time Tracking Clock -->
+        <div class="time-tracking-container">
+            <h3>⏱️ Simple Working Timer</h3>
+            
+            <!-- Test Button -->
+            <div style="margin-bottom: 15px; text-align: center;">
+                <button class="btn btn-secondary" onclick="testSimpleTimer()" style="font-size: 12px;">
+                    🧪 Test Timer
+                </button>
+                <button class="btn btn-secondary" onclick="reinitializeTimer()" style="font-size: 12px; margin-left: 10px;">
+                    🔄 Reinit Timer
+                </button>
+                <button class="btn btn-secondary" onclick="createSampleData()" style="font-size: 12px; margin-left: 10px;">
+                    📝 Create Sample Data
+                </button>
+                <button class="btn btn-success" onclick="testTaskCompletion()" style="font-size: 12px; margin-left: 10px;">
+                    ✅ Test Task Completion
+                </button>
+                <button class="btn btn-primary" onclick="testCheckboxFunctionality()" style="font-size: 12px; margin-left: 10px;">
+                    ☑️ Test Checkboxes
+                </button>
+            </div>
+            
+            <!-- Simple Timer Display -->
+            <div class="simple-timer">
+                <div class="timer-display" id="simpleTimerDisplay">
+                    <div class="timer-time" id="simpleTimerTime">00:00:00</div>
+                    <div class="timer-status" id="simpleTimerStatus">Ready to start</div>
+                </div>
+                
+                <!-- Simple Controls -->
+                <div class="simple-controls">
+                    <div class="task-selection">
+                        <label for="simpleTaskSelect">Select Task:</label>
+                        <select id="simpleTaskSelect" class="task-select-field">
+                            <option value="">Choose a task to track...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="estimated-time-input">
+                        <label for="simpleEstimatedTime">Estimated Time (hours):</label>
+                        <input type="number" id="simpleEstimatedTime" placeholder="1.5 (1 hour 30 min)" min="0" step="0.5" class="time-input-field">
+                    </div>
+                    
+                    <div class="simple-buttons">
+                        <button class="btn btn-success" id="simpleStartBtn">
+                            ▶️ Start Timer
+                        </button>
+                        <button class="btn btn-danger" id="simpleStopBtn" style="display: none;">
+                            ⏹️ Stop Timer
+                        </button>
+                        <button class="btn btn-secondary" id="simplePauseBtn" style="display: none;">
+                            ⏸️ Pause
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Current Task Info -->
+                <div class="simple-task-info" id="simpleTaskInfo" style="display: none;">
+                    <h4>Currently Tracking:</h4>
+                    <div class="task-details">
+                        <p><strong>Task:</strong> <span id="simpleTaskName">-</span></p>
+                        <p><strong>Project:</strong> <span id="simpleProjectName">-</span></p>
+                        <p><strong>Started:</strong> <span id="simpleStartTime">-</span></p>
+                        <p><strong>Estimated:</strong> <span id="simpleEstimated">-</span> hours</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -932,6 +1476,20 @@
                     <label for="taskActualTime">Actual Time (hours)</label>
                     <input type="number" id="taskActualTime" class="form-input" placeholder="0.5" min="0" step="0.5">
                 </div>
+                
+                <!-- Subtasks Section -->
+                <div class="form-group">
+                    <label>Subtasks</label>
+                    <div class="subtasks-container" id="subtasksContainer">
+                        <div class="subtask-item">
+                            <input type="text" class="form-input subtask-input" placeholder="Enter subtask name">
+                            <input type="number" class="form-input subtask-time" placeholder="Est. time (hrs)" min="0" step="0.5">
+                            <button type="button" class="btn btn-danger btn-sm remove-subtask">🗑️</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm" id="addSubtaskBtn">+ Add Subtask</button>
+                </div>
+                
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="cancelTaskBtn">Cancel</button>
                     <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
@@ -946,7 +1504,17 @@
             constructor() {
                 this.projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
                 this.tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                this.subtasks = JSON.parse(localStorage.getItem('crm_subtasks') || '[]');
                 this.theme = localStorage.getItem('crm_theme') || 'light';
+                
+                // Time tracking properties
+                this.currentTimer = null;
+                this.timerStartTime = null;
+                this.timerPauseTime = null;
+                this.totalPausedTime = 0;
+                this.currentTrackingTask = null;
+                this.estimatedTime = 0;
+                
                 this.init();
             }
 
@@ -955,6 +1523,7 @@
                 this.applyTheme();
                 this.render();
                 this.updateEarningsDisplay();
+                this.loadTimerState(); // Load timer state on initialization
             }
 
             setupEventListeners() {
@@ -993,6 +1562,18 @@
                     this.closeTaskModal();
                 });
 
+                // Subtask buttons
+                document.getElementById('addSubtaskBtn').addEventListener('click', () => {
+                    this.addSubtaskField();
+                });
+
+                // Delegate event listener for remove subtask buttons
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('remove-subtask')) {
+                        this.removeSubtaskField(e.target);
+                    }
+                });
+
                 // Reset button
                 document.getElementById('resetBtn').addEventListener('click', () => {
                     this.resetData();
@@ -1006,6 +1587,63 @@
                 document.getElementById('taskModalOverlay').addEventListener('click', (e) => {
                     if (e.target === e.currentTarget) this.closeTaskModal();
                 });
+
+                // Page visibility change handling for timer persistence
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        // Page is hidden (tab switch, minimize, etc.)
+                        if (this.currentTimer && this.timerStartTime) {
+                            this.saveTimerState();
+                            console.log('Timer state saved due to page visibility change');
+                        }
+                    } else {
+                        // Page is visible again
+                        if (this.currentTimer && this.timerStartTime) {
+                            console.log('Page visible again, timer continues running');
+                        }
+                    }
+                });
+
+                // Window beforeunload event for timer persistence
+                window.addEventListener('beforeunload', () => {
+                    if (this.currentTimer && this.timerStartTime) {
+                        this.saveTimerState();
+                        console.log('Timer state saved before page unload');
+                    }
+                });
+
+                // Periodic timer state saving (every 30 seconds)
+                setInterval(() => {
+                    if (this.currentTimer && this.timerStartTime) {
+                        this.saveTimerState();
+                    }
+                }, 30000);
+
+                // Timer button event listeners
+                const startTimerBtn = document.getElementById('startTimerBtn');
+                const stopTimerBtn = document.getElementById('stopTimerBtn');
+                const pauseTimerBtn = document.getElementById('pauseTimerBtn');
+
+                if (startTimerBtn) {
+                    startTimerBtn.addEventListener('click', () => {
+                        console.log('Start button clicked via event listener');
+                        this.startTimer();
+                    });
+                }
+
+                if (stopTimerBtn) {
+                    stopTimerBtn.addEventListener('click', () => {
+                        console.log('Stop button clicked via event listener');
+                        this.stopTimer();
+                    });
+                }
+
+                if (pauseTimerBtn) {
+                    pauseTimerBtn.addEventListener('click', () => {
+                        console.log('Pause button clicked via event listener');
+                        this.pauseTimer();
+                    });
+                }
             }
 
             toggleTheme() {
@@ -1038,6 +1676,9 @@
                 document.getElementById('taskModalOverlay').classList.add('active');
                 document.getElementById('taskModalTitle').textContent = 'New Task';
                 document.getElementById('taskForm').reset();
+                
+                // Clear subtasks for new task
+                this.clearSubtasks();
             }
 
             closeTaskModal() {
@@ -1114,6 +1755,10 @@
                     return;
                 }
 
+                // Collect subtasks data
+                const subtasks = this.collectSubtasksData();
+                console.log('Collected subtasks:', subtasks);
+
                 if (editTaskId) {
                     // Editing existing task
                     const taskIndex = this.tasks.findIndex(t => t.id === editTaskId);
@@ -1125,6 +1770,7 @@
                             priority,
                             estimatedTime,
                             actualTime,
+                            subtasks: subtasks,
                             updatedAt: new Date().toISOString()
                         };
                     }
@@ -1138,6 +1784,7 @@
                         status: 'todo',
                         estimatedTime,
                         actualTime,
+                        subtasks: subtasks,
                         createdAt: new Date().toISOString()
                     };
                     this.tasks.push(task);
@@ -1155,6 +1802,7 @@
                 this.renderProjects();
                 this.renderTasks();
                 this.renderCompletionLog();
+                this.updateTaskDropdown(); // Update task dropdown on render
             }
 
             renderProjects() {
@@ -1334,6 +1982,23 @@
                                     🗑️ Delete
                                 </button>
                             </div>
+                            
+                            ${task.subtasks && task.subtasks.length > 0 ? `
+                                <div class="task-with-subtasks">
+                                    <h5>Subtasks:</h5>
+                                    <div class="subtasks-list">
+                                        ${task.subtasks.map(subtask => `
+                                            <div class="subtask-display">
+                                                <div class="subtask-info">
+                                                    <span class="subtask-name">${subtask.name}</span>
+                                                    <span class="subtask-time">${subtask.estimatedTime || 0} hrs</span>
+                                                </div>
+                                                <span class="subtask-status ${subtask.status}">${subtask.status}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
                         </div>
                     `;
                 }).join('');
@@ -1341,7 +2006,9 @@
 
             renderCompletionLog() {
                 const completionLog = document.getElementById('completionLog');
-                const completedTasks = this.tasks.filter(t => t.status === 'completed');
+                if (!completionLog) return;
+
+                const completedTasks = this.tasks.filter(task => task.status === 'completed');
                 
                 if (completedTasks.length === 0) {
                     completionLog.innerHTML = `
@@ -1353,22 +2020,62 @@
                     return;
                 }
 
-                completionLog.innerHTML = completedTasks.map(task => {
+                // Sort by completion date (newest first)
+                completedTasks.sort((a, b) => {
+                    if (a.completedAt && b.completedAt) {
+                        return new Date(b.completedAt) - new Date(a.completedAt);
+                    }
+                    return 0;
+                });
+
+                const logHTML = completedTasks.map((task, index) => {
                     const project = this.projects.find(p => p.id === task.projectId);
                     const projectName = project ? project.name : 'Unknown Project';
+                    
+                    const estimatedTime = task.estimatedTime || 0;
+                    const actualTime = task.actualTime || 0;
                     const completionDate = task.completedAt ? new Date(task.completedAt).toLocaleDateString() : 'Unknown';
+                    const completionTime = task.completedAt ? new Date(task.completedAt).toLocaleTimeString() : '';
+                    
+                    // Check if task was completed in the last 24 hours
+                    const isRecent = task.completedAt && (Date.now() - new Date(task.completedAt).getTime()) < 24 * 60 * 60 * 1000;
                     
                     return `
-                        <div class="completion-log-entry">
-                            <h4>${task.name}</h4>
-                            <p><strong>Project:</strong> ${projectName}</p>
-                            <p><strong>Priority:</strong> ${task.priority}</p>
-                            <p><strong>Estimated Time:</strong> ${task.estimatedTime} hours</p>
-                            <p><strong>Actual Time:</strong> ${task.actualTime} hours</p>
-                            <p class="completion-date">Completed on: ${completionDate}</p>
+                        <div class="completion-log-item ${isRecent ? 'recent-completion' : ''}">
+                            <div class="completion-log-header">
+                                <div>
+                                    <div class="completion-task-name">
+                                        ${task.name}
+                                        ${isRecent ? '<span class="new-badge">🆕 New!</span>' : ''}
+                                    </div>
+                                    <div class="completion-project-name">${projectName}</div>
+                                </div>
+                                <div class="completion-date">
+                                    <div>${completionDate}</div>
+                                    <div class="completion-time">${completionTime}</div>
+                                </div>
+                            </div>
+                            <div class="completion-time-info">
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Estimated Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(estimatedTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Actual Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(actualTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Difference</span>
+                                    <span class="time-info-value ${actualTime > estimatedTime ? 'over-estimate' : 'under-estimate'}">
+                                        ${this.formatTimeReadable(Math.abs(actualTime - estimatedTime))}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }).join('');
+
+                completionLog.innerHTML = logHTML;
             }
 
             deleteProject(projectId) {
@@ -1405,18 +2112,61 @@
             toggleTaskCompletion(taskId) {
                 const task = this.tasks.find(t => t.id === taskId);
                 if (task) {
+                    console.log('Toggling task completion:', task.name, 'Current status:', task.status);
+                    
                     if (task.status === 'todo') {
                         task.status = 'in-progress';
+                        console.log('Task marked as in-progress');
                     } else if (task.status === 'in-progress') {
                         task.status = 'completed';
                         task.completedAt = new Date().toISOString();
+                        
+                        // Set actual time if not already set
+                        if (!task.actualTime) {
+                            task.actualTime = task.estimatedTime || 0;
+                            console.log('Set actual time to estimated time:', task.actualTime);
+                        }
+                        
+                        // Mark all subtasks as completed
+                        if (task.subtasks && task.subtasks.length > 0) {
+                            task.subtasks.forEach(subtask => {
+                                subtask.status = 'completed';
+                                subtask.completedAt = new Date().toISOString();
+                            });
+                            console.log('Marked all subtasks as completed');
+                        }
+                        
+                        console.log('Task marked as completed');
                     } else if (task.status === 'completed') {
                         task.status = 'todo';
                         delete task.completedAt;
+                        
+                        // Reset subtasks to todo
+                        if (task.subtasks && task.subtasks.length > 0) {
+                            task.subtasks.forEach(subtask => {
+                                subtask.status = 'todo';
+                                delete subtask.completedAt;
+                            });
+                            console.log('Reset all subtasks to todo');
+                        }
+                        
+                        console.log('Task reset to todo');
                     }
+                    
+                    // Save to localStorage
                     localStorage.setItem('crm_tasks', JSON.stringify(this.tasks));
+                    console.log('Task saved to localStorage');
+                    
+                    // Refresh displays
                     this.render();
                     this.updateEarningsDisplay();
+                    
+                    // Force refresh completion log
+                    this.renderCompletionLog();
+                    
+                    console.log('Task completion toggled successfully. New status:', task.status);
+                } else {
+                    console.error('Task not found for ID:', taskId);
                 }
             }
 
@@ -1430,6 +2180,9 @@
                 document.getElementById('taskPriority').value = task.priority;
                 document.getElementById('taskEstimatedTime').value = task.estimatedTime || '';
                 document.getElementById('taskActualTime').value = task.actualTime || '';
+
+                // Populate subtasks if they exist
+                this.populateSubtasksForEdit(task.subtasks || []);
 
                 // Update modal title
                 document.getElementById('taskModalTitle').textContent = 'Edit Task';
@@ -1514,6 +2267,342 @@
                 }
             }
 
+            // Timer Persistence Methods
+            saveTimerState() {
+                const timerState = {
+                    currentTrackingTask: this.currentTrackingTask ? this.currentTrackingTask.id : null,
+                    estimatedTime: this.estimatedTime,
+                    timerStartTime: this.timerStartTime,
+                    timerPauseTime: this.timerPauseTime,
+                    totalPausedTime: this.totalPausedTime,
+                    lastSaved: Date.now()
+                };
+                localStorage.setItem('crm_timer_state', JSON.stringify(timerState));
+            }
+            
+            loadTimerState() {
+                try {
+                    const savedState = localStorage.getItem('crm_timer_state');
+                    if (savedState) {
+                        const timerState = JSON.parse(savedState);
+                        
+                        // Check if timer was running when page was closed
+                        if (timerState.timerStartTime && !timerState.timerPauseTime) {
+                            // Timer was running, restore it
+                            this.restoreRunningTimer(timerState);
+                        } else if (timerState.timerPauseTime) {
+                            // Timer was paused, restore paused state
+                            this.restorePausedTimer(timerState);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading timer state:', error);
+                }
+            }
+            
+            restoreRunningTimer(timerState) {
+                const task = this.tasks.find(t => t.id === timerState.currentTrackingTask);
+                if (!task) return;
+                
+                const project = this.projects.find(p => p.id === task.projectId);
+                const projectName = project ? project.name : 'Unknown Project';
+                
+                // Restore tracking properties
+                this.currentTrackingTask = task;
+                this.estimatedTime = timerState.estimatedTime;
+                this.timerStartTime = timerState.timerStartTime;
+                this.totalPausedTime = timerState.totalPausedTime;
+                
+                // Start the timer
+                this.currentTimer = setInterval(() => this.updateTimerDisplay(), 1000);
+                
+                // Update UI
+                this.updateTimerUI('tracking');
+                
+                // Show current task info
+                document.getElementById('currentTaskInfo').style.display = 'block';
+                document.getElementById('trackingTaskName').textContent = task.name;
+                document.getElementById('trackingProjectName').textContent = projectName;
+                document.getElementById('trackingStartTime').textContent = new Date(timerState.timerStartTime).toLocaleTimeString();
+                document.getElementById('trackingEstimatedTime').textContent = timerState.estimatedTime;
+                
+                console.log(`Restored running timer for task: ${task.name} (${projectName})`);
+            }
+            
+            restorePausedTimer(timerState) {
+                const task = this.tasks.find(t => t.id === timerState.currentTrackingTask);
+                if (!task) return;
+                
+                const project = this.projects.find(p => p.id === task.projectId);
+                const projectName = project ? project.name : 'Unknown Project';
+                
+                // Restore tracking properties
+                this.currentTrackingTask = task;
+                this.estimatedTime = timerState.estimatedTime;
+                this.timerStartTime = timerState.timerStartTime;
+                this.timerPauseTime = timerState.timerPauseTime;
+                this.totalPausedTime = timerState.totalPausedTime;
+                
+                // Update UI to paused state
+                this.updateTimerUI('paused');
+                
+                // Show current task info
+                document.getElementById('currentTaskInfo').style.display = 'block';
+                document.getElementById('trackingTaskName').textContent = task.name;
+                document.getElementById('trackingProjectName').textContent = projectName;
+                document.getElementById('trackingStartTime').textContent = new Date(timerState.timerStartTime).toLocaleTimeString();
+                document.getElementById('trackingEstimatedTime').textContent = timerState.estimatedTime;
+                
+                console.log(`Restored paused timer for task: ${task.name} (${projectName})`);
+            }
+
+            // Time Tracking Methods
+            startTimer() {
+                console.log('startTimer() called!');
+                const selectedTaskId = document.getElementById('taskSelect').value;
+                const estimatedTime = parseFloat(document.getElementById('estimatedTimeInput').value) || 0;
+                
+                console.log('Selected task ID:', selectedTaskId);
+                console.log('Estimated time:', estimatedTime);
+                
+                if (!selectedTaskId) {
+                    alert('Please select a task to track');
+                    return;
+                }
+                
+                if (!estimatedTime) {
+                    alert('Please enter estimated time before starting the timer');
+                    return;
+                }
+                
+                console.log('Starting timer for task:', selectedTaskId, 'with estimated time:', estimatedTime);
+                this.startTimerForTask(selectedTaskId, estimatedTime);
+            }
+            
+            startTimerForTask(taskId, estimatedTime) {
+                console.log('startTimerForTask() called with:', taskId, estimatedTime);
+                
+                const task = this.tasks.find(t => t.id === taskId);
+                if (!task) {
+                    console.log('Task not found!');
+                    return;
+                }
+                
+                const project = this.projects.find(p => p.id === task.projectId);
+                const projectName = project ? project.name : 'Unknown Project';
+                
+                console.log('Found task:', task.name, 'in project:', projectName);
+                
+                // Set tracking properties
+                this.currentTrackingTask = task;
+                this.estimatedTime = estimatedTime;
+                this.timerStartTime = Date.now();
+                this.totalPausedTime = 0;
+                this.timerPauseTime = null;
+                
+                console.log('Timer properties set:', {
+                    currentTrackingTask: this.currentTrackingTask.name,
+                    estimatedTime: this.estimatedTime,
+                    timerStartTime: this.timerStartTime
+                });
+                
+                // Start the timer
+                this.currentTimer = setInterval(() => this.updateTimerDisplay(), 1000);
+                console.log('Timer interval set:', this.currentTimer);
+                
+                // Save timer state
+                this.saveTimerState();
+                
+                // Update UI
+                this.updateTimerUI('tracking');
+                
+                // Show current task info
+                document.getElementById('currentTaskInfo').style.display = 'block';
+                document.getElementById('trackingTaskName').textContent = task.name;
+                document.getElementById('trackingProjectName').textContent = projectName;
+                document.getElementById('trackingStartTime').textContent = new Date().toLocaleTimeString();
+                document.getElementById('trackingEstimatedTime').textContent = estimatedTime;
+                
+                // Update task with estimated time if not set
+                if (!task.estimatedTime) {
+                    task.estimatedTime = estimatedTime;
+                    this.saveTasks();
+                }
+                
+                console.log(`Started tracking task: ${task.name} (${projectName})`);
+            }
+            
+            stopTimer() {
+                console.log('stopTimer() called!');
+                console.log('currentTimer:', this.currentTimer);
+                console.log('timerStartTime:', this.timerStartTime);
+                
+                if (!this.currentTimer) {
+                    console.log('No timer running, cannot stop');
+                    return;
+                }
+                
+                // Calculate total time spent
+                const totalTime = this.calculateTotalTime();
+                const totalHours = (totalTime / (1000 * 60 * 60)).toFixed(2);
+                
+                console.log('Total time calculated:', totalTime, 'ms =', totalHours, 'hours');
+                
+                // Update task with actual time
+                if (this.currentTrackingTask) {
+                    console.log('Updating task:', this.currentTrackingTask.name);
+                    this.currentTrackingTask.actualTime = parseFloat(totalHours);
+                    this.currentTrackingTask.status = 'completed';
+                    this.currentTrackingTask.completedAt = new Date().toISOString();
+                    
+                    // Save to localStorage
+                    this.saveTasks();
+                    
+                    // Add to completion log
+                    this.addToCompletionLog(this.currentTrackingTask, totalHours);
+                    
+                    console.log(`Stopped tracking task: ${this.currentTrackingTask.name}. Total time: ${totalHours} hours`);
+                } else {
+                    console.log('No current tracking task found!');
+                }
+                
+                // Clear timer
+                clearInterval(this.currentTimer);
+                this.currentTimer = null;
+                
+                // Reset tracking properties
+                this.currentTrackingTask = null;
+                this.timerStartTime = null;
+                this.totalPausedTime = 0;
+                this.timerPauseTime = null;
+                
+                // Clear timer state from localStorage
+                localStorage.removeItem('crm_timer_state');
+                
+                // Update UI
+                this.updateTimerUI('ready');
+                
+                // Force update completion log immediately
+                this.renderCompletionLog();
+                
+                // Scroll to completion log to show the newly completed task
+                const completionLog = document.getElementById('completionLog');
+                if (completionLog) {
+                    completionLog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                
+                // Update other displays
+                this.render();
+                this.updateEarningsDisplay();
+                
+                // Show success message with completion details
+                const taskName = this.currentTrackingTask ? this.currentTrackingTask.name : 'Task';
+                alert(`✅ ${taskName} completed successfully!\n\n⏱️ Total time: ${totalHours} hours\n📝 Task has been added to completion log\n💰 Project progress updated`);
+            }
+            
+            pauseTimer() {
+                if (!this.currentTimer || !this.timerStartTime) return;
+                
+                if (this.timerPauseTime) {
+                    // Resume timer
+                    this.totalPausedTime += Date.now() - this.timerPauseTime;
+                    this.timerPauseTime = null;
+                    this.updateTimerUI('tracking');
+                } else {
+                    // Pause timer
+                    this.timerPauseTime = Date.now();
+                    this.updateTimerUI('paused');
+                }
+                
+                // Save timer state
+                this.saveTimerState();
+            }
+            
+            updateTimerDisplay() {
+                if (!this.timerStartTime) return;
+                
+                const totalTime = this.calculateTotalTime();
+                const hours = Math.floor(totalTime / (1000 * 60 * 60));
+                const minutes = Math.floor((totalTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((totalTime % (1000 * 60)) / 1000);
+                
+                const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                document.getElementById('timerDisplay').textContent = timeString;
+            }
+            
+            calculateTotalTime() {
+                if (!this.timerStartTime) return 0;
+                
+                const currentTime = this.timerPauseTime || Date.now();
+                return currentTime - this.timerStartTime - this.totalPausedTime;
+            }
+            
+            updateTimerUI(state) {
+                const timerDisplay = document.querySelector('.timer-display');
+                const timerStatus = document.getElementById('timerStatus');
+                const startBtn = document.getElementById('startTimerBtn');
+                const stopBtn = document.getElementById('stopTimerBtn');
+                const pauseBtn = document.getElementById('pauseTimerBtn');
+                const currentTaskInfo = document.getElementById('currentTaskInfo');
+                
+                // Remove all state classes
+                timerDisplay.classList.remove('tracking', 'paused');
+                
+                switch (state) {
+                    case 'ready':
+                        timerDisplay.classList.add('ready');
+                        timerStatus.textContent = 'Ready to start';
+                        startBtn.style.display = 'inline-block';
+                        stopBtn.style.display = 'none';
+                        pauseBtn.style.display = 'none';
+                        currentTaskInfo.style.display = 'none';
+                        document.getElementById('timerDisplay').textContent = '00:00:00';
+                        break;
+                        
+                    case 'tracking':
+                        timerDisplay.classList.add('tracking');
+                        timerStatus.textContent = 'Tracking time...';
+                        startBtn.style.display = 'none';
+                        stopBtn.style.display = 'inline-block';
+                        pauseBtn.style.display = 'inline-block';
+                        pauseBtn.textContent = '⏸️ Pause';
+                        break;
+                        
+                    case 'paused':
+                        timerDisplay.classList.add('paused');
+                        timerStatus.textContent = 'Timer paused';
+                        pauseBtn.textContent = '▶️ Resume';
+                        break;
+                }
+            }
+            
+            addToCompletionLog(task, totalHours) {
+                // This will be automatically added to the completion log
+                // since we're updating the task status to 'completed'
+                console.log(`Added to completion log: ${task.name} - ${totalHours} hours`);
+            }
+            
+            // Update task dropdown with available tasks
+            updateTaskDropdown() {
+                const taskSelect = document.getElementById('taskSelect');
+                if (!taskSelect) return;
+                
+                // Clear existing options
+                taskSelect.innerHTML = '<option value="">Choose a task to track...</option>';
+                
+                // Add active tasks
+                this.tasks.forEach(task => {
+                    if (task.status !== 'completed') {
+                        const option = document.createElement('option');
+                        option.value = task.id;
+                        const project = this.projects.find(p => p.id === task.projectId);
+                        const projectName = project ? project.name : 'Unknown Project';
+                        option.textContent = `${task.name} (${projectName})`;
+                        taskSelect.appendChild(option);
+                    }
+                });
+            }
+
             resetData() {
                 if (confirm('Are you sure you want to reset all data? This action cannot be undone.')) {
                     this.projects = [];
@@ -1525,14 +2614,920 @@
                     alert('All data has been reset!');
                 }
             }
+
+            completeTask(task, totalHours) {
+                console.log('completeTask called with:', { taskName: task.name, totalHours });
+                
+                // Update task
+                task.actualTime = parseFloat(totalHours);
+                task.status = 'completed';
+                task.completedAt = new Date().toISOString();
+                
+                console.log('Task updated:', task);
+                
+                // Save to localStorage
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const taskIndex = tasks.findIndex(t => t.id === task.id);
+                
+                if (taskIndex !== -1) {
+                    tasks[taskIndex] = task;
+                    localStorage.setItem('crm_tasks', JSON.stringify(tasks));
+                    console.log('Task saved to localStorage');
+                } else {
+                    console.error('Task not found in localStorage for update');
+                }
+                
+                // Update completion log
+                this.updateCompletionLog();
+                
+                // Force refresh the main CRM completion log
+                this.refreshMainCompletionLog();
+                
+                // Refresh CRM display if available
+                if (window.crm && window.crm.render) {
+                    console.log('Refreshing main CRM display...');
+                    window.crm.render();
+                    window.crm.updateEarningsDisplay();
+                } else {
+                    console.error('Main CRM instance not available for refresh');
+                }
+                
+                // Also refresh the task dropdown to remove completed task
+                this.populateTaskDropdown();
+                
+                console.log('Task completed and saved:', task.name);
+            }
+            
+            updateCompletionLog() {
+                const completionLog = document.getElementById('completionLog');
+                if (!completionLog) return;
+                
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const completedTasks = tasks.filter(task => task.status === 'completed');
+                
+                if (completedTasks.length === 0) {
+                    completionLog.innerHTML = `
+                        <div class="empty-state">
+                            <h4>No completed work yet</h4>
+                            <p>Complete tasks to see your work log!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Sort by completion date (newest first)
+                completedTasks.sort((a, b) => {
+                    if (a.completedAt && b.completedAt) {
+                        return new Date(b.completedAt) - new Date(a.completedAt);
+                    }
+                    return 0;
+                });
+                
+                const projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
+                
+                const logHTML = completedTasks.map((task, index) => {
+                    const project = projects.find(p => p.id === task.projectId);
+                    const projectName = project ? project.name : 'Unknown Project';
+                    
+                    const estimatedTime = task.estimatedTime || 0;
+                    const actualTime = task.actualTime || 0;
+                    const completionDate = task.completedAt ? new Date(task.completedAt).toLocaleDateString() : 'Unknown';
+                    const completionTime = task.completedAt ? new Date(task.completedAt).toLocaleTimeString() : '';
+                    
+                    // Check if task was completed in the last 24 hours
+                    const isRecent = task.completedAt && (Date.now() - new Date(task.completedAt).getTime()) < 24 * 60 * 60 * 1000;
+                    
+                    return `
+                        <div class="completion-log-item ${isRecent ? 'recent-completion' : ''}">
+                            <div class="completion-log-header">
+                                <div>
+                                    <div class="completion-task-name">
+                                        ${task.name}
+                                        ${isRecent ? '<span class="new-badge">🆕 New!</span>' : ''}
+                                    </div>
+                                    <div class="completion-project-name">${projectName}</div>
+                                </div>
+                                <div class="completion-date">
+                                    <div>${completionDate}</div>
+                                    <div class="completion-time">${completionTime}</div>
+                                </div>
+                            </div>
+                            <div class="completion-time-info">
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Estimated Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(estimatedTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Actual Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(actualTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Difference</span>
+                                    <span class="time-info-value ${actualTime > estimatedTime ? 'over-estimate' : 'under-estimate'}">
+                                        ${this.formatTimeReadable(Math.abs(actualTime - estimatedTime))}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                completionLog.innerHTML = logHTML;
+                console.log('Completion log updated with', completedTasks.length, 'completed tasks');
+            }
+
+            formatTimeReadable(hours) {
+                const wholeHours = Math.floor(hours);
+                const minutes = Math.round((hours - wholeHours) * 60);
+                
+                if (wholeHours === 0) {
+                    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+                } else if (minutes === 0) {
+                    return `${wholeHours} hour${wholeHours !== 1 ? 's' : ''}`;
+                } else {
+                    return `${wholeHours} hour${wholeHours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+                }
+            }
+
+            // Refresh the main CRM completion log
+            refreshMainCompletionLog() {
+                if (window.crm && window.crm.renderCompletionLog) {
+                    window.crm.renderCompletionLog();
+                    console.log('Main CRM completion log refreshed');
+                }
+            }
+
+            // Subtask management methods
+            addSubtaskField() {
+                const container = document.getElementById('subtasksContainer');
+                const subtaskItem = document.createElement('div');
+                subtaskItem.className = 'subtask-item';
+                subtaskItem.innerHTML = `
+                    <input type="text" class="form-input subtask-input" placeholder="Enter subtask name">
+                    <input type="number" class="form-input subtask-time" placeholder="Est. time (hrs)" min="0" step="0.5">
+                    <button type="button" class="btn btn-danger btn-sm remove-subtask">🗑️</button>
+                `;
+                container.appendChild(subtaskItem);
+            }
+
+            removeSubtaskField(button) {
+                const subtaskItem = button.closest('.subtask-item');
+                if (subtaskItem) {
+                    subtaskItem.remove();
+                }
+            }
+
+            collectSubtasksData() {
+                const subtaskItems = document.querySelectorAll('.subtask-item');
+                const subtasks = [];
+                
+                subtaskItems.forEach(item => {
+                    const nameInput = item.querySelector('.subtask-input');
+                    const timeInput = item.querySelector('.subtask-time');
+                    
+                    const name = nameInput.value.trim();
+                    const estimatedTime = parseFloat(timeInput.value) || 0;
+                    
+                    if (name) { // Only add subtasks with names
+                        subtasks.push({
+                            id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                            name: name,
+                            estimatedTime: estimatedTime,
+                            status: 'todo',
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+                });
+                
+                return subtasks;
+            }
+
+            clearSubtasks() {
+                // Clear subtasks for new task
+                const subtasksContainer = document.getElementById('subtasksContainer');
+                subtasksContainer.innerHTML = '';
+                
+                // Add one default subtask field
+                this.addSubtaskField();
+            }
+
+            populateSubtasksForEdit(subtasks) {
+                const subtasksContainer = document.getElementById('subtasksContainer');
+                subtasksContainer.innerHTML = '';
+                
+                if (subtasks && subtasks.length > 0) {
+                    subtasks.forEach(subtask => {
+                        const subtaskItem = document.createElement('div');
+                        subtaskItem.className = 'subtask-item';
+                        subtaskItem.innerHTML = `
+                            <input type="text" class="form-input subtask-input" placeholder="Enter subtask name" value="${subtask.name}">
+                            <input type="number" class="form-input subtask-time" placeholder="Est. time (hrs)" min="0" step="0.5" value="${subtask.estimatedTime}">
+                            <button type="button" class="btn btn-danger btn-sm remove-subtask">🗑️</button>
+                        `;
+                        subtasksContainer.appendChild(subtaskItem);
+                    });
+                } else {
+                    // Add one default subtask field if no existing subtasks
+                    this.addSubtaskField();
+                }
+            }
         }
 
         // Initialize CRM when page loads
         let crm;
+        let simpleTimer;
+        
         document.addEventListener('DOMContentLoaded', () => {
             crm = new SimpleCRM();
+            // Make CRM globally available
+            window.crm = crm;
             console.log('CRM initialized successfully!');
+            console.log('CRM instance available as:', crm);
+            console.log('Global CRM available as:', window.crm);
+            
+            // Initialize simple timer with a small delay to ensure DOM is ready
+            setTimeout(() => {
+                simpleTimer = new SimpleTimer();
+                window.simpleTimer = simpleTimer;
+                console.log('SimpleTimer initialized successfully!');
+            }, 100);
         });
+
+        // Test function for debugging timer functionality
+        function testTimerFunctionality() {
+            console.log('=== TIMER FUNCTIONALITY TEST ===');
+            
+            if (typeof crm === 'undefined') {
+                console.log('❌ CRM instance not available');
+                alert('CRM not initialized yet. Please wait for page to load completely.');
+                return;
+            }
+            
+            console.log('✅ CRM instance available');
+            console.log('Tasks count:', crm.tasks.length);
+            console.log('Projects count:', crm.projects.length);
+            console.log('Current timer:', crm.currentTimer);
+            console.log('Timer start time:', crm.timerStartTime);
+            console.log('Current tracking task:', crm.currentTrackingTask);
+            
+            // Test task dropdown
+            const taskSelect = document.getElementById('taskSelect');
+            if (taskSelect) {
+                console.log('Task dropdown found with', taskSelect.children.length, 'options');
+                console.log('Selected value:', taskSelect.value);
+            } else {
+                console.log('❌ Task dropdown not found');
+            }
+            
+            // Test estimated time input
+            const estimatedTimeInput = document.getElementById('estimatedTimeInput');
+            if (estimatedTimeInput) {
+                console.log('Estimated time input found, value:', estimatedTimeInput.value);
+            } else {
+                console.log('❌ Estimated time input not found');
+            }
+            
+            // Test timer display
+            const timerDisplay = document.getElementById('timerDisplay');
+            if (timerDisplay) {
+                console.log('Timer display found, current text:', timerDisplay.textContent);
+            } else {
+                console.log('❌ Timer display not found');
+            }
+            
+            // Test stop button
+            const stopBtn = document.getElementById('stopTimerBtn');
+            if (stopBtn) {
+                console.log('Stop button found, display style:', stopBtn.style.display);
+                console.log('Stop button onclick:', stopBtn.onclick);
+            } else {
+                console.log('❌ Stop button not found');
+            }
+            
+            console.log('=== END TEST ===');
+        }
+
+        // Test function for simple timer
+        function testSimpleTimer() {
+            console.log('=== SIMPLE TIMER TEST ===');
+            
+            if (typeof simpleTimer === 'undefined') {
+                console.log('❌ SimpleTimer instance not available');
+                alert('SimpleTimer not initialized yet. Please wait for page to load completely.');
+                return;
+            }
+            
+            console.log('✅ SimpleTimer instance available');
+            console.log('Timer running:', simpleTimer.isRunning);
+            console.log('Timer paused:', simpleTimer.isPaused);
+            console.log('Current task:', simpleTimer.currentTask);
+            
+            // Test simple timer elements
+            const simpleTaskSelect = document.getElementById('simpleTaskSelect');
+            const simpleEstimatedTime = document.getElementById('simpleEstimatedTime');
+            const simpleStartBtn = document.getElementById('simpleStartBtn');
+            const simpleStopBtn = document.getElementById('simpleStopBtn');
+            const simpleTimerTime = document.getElementById('simpleTimerTime');
+            
+            if (simpleTaskSelect) {
+                console.log('Simple task dropdown found with', simpleTaskSelect.children.length, 'options');
+                console.log('Selected value:', simpleTaskSelect.value);
+            } else {
+                console.log('❌ Simple task dropdown not found');
+            }
+            
+            if (simpleEstimatedTime) {
+                console.log('Simple estimated time input found, value:', simpleEstimatedTime.value);
+            } else {
+                console.log('❌ Simple estimated time input not found');
+            }
+            
+            if (simpleStartBtn) {
+                console.log('Simple start button found');
+            } else {
+                console.log('❌ Simple start button not found');
+            }
+            
+            if (simpleStopBtn) {
+                console.log('Simple stop button found, display style:', simpleStopBtn.style.display);
+            } else {
+                console.log('❌ Simple stop button not found');
+            }
+            
+            if (simpleTimerTime) {
+                console.log('Simple timer display found, current text:', simpleTimerTime.textContent);
+            } else {
+                console.log('❌ Simple timer display not found');
+            }
+            
+            // Test localStorage
+            const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+            const projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
+            console.log('Tasks in localStorage:', tasks.length);
+            console.log('Projects in localStorage:', projects.length);
+            
+            console.log('=== END SIMPLE TIMER TEST ===');
+        }
+
+        // Function to reinitialize the timer
+        function reinitializeTimer() {
+            console.log('Reinitializing timer...');
+            
+            if (window.simpleTimer) {
+                console.log('Destroying old timer instance...');
+                if (window.simpleTimer.interval) {
+                    clearInterval(window.simpleTimer.interval);
+                }
+                delete window.simpleTimer;
+            }
+            
+            // Create new timer instance
+            setTimeout(() => {
+                window.simpleTimer = new SimpleTimer();
+                console.log('Timer reinitialized successfully!');
+                alert('Timer reinitialized! Please try using it now.');
+            }, 100);
+        }
+
+        // Function to create sample data for testing
+        function createSampleData() {
+            console.log('Creating sample data...');
+            
+            // Create sample project
+            const sampleProject = {
+                id: 'sample-project-1',
+                name: 'Sample Project',
+                description: 'A sample project for testing',
+                budget: 1000,
+                status: 'active',
+                createdAt: new Date().toISOString()
+            };
+            
+            // Create sample task
+            const sampleTask = {
+                id: 'sample-task-1',
+                name: 'Sample Task',
+                description: 'A sample task for testing the timer',
+                projectId: 'sample-project-1',
+                status: 'active',
+                priority: 'medium',
+                estimatedTime: 2,
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage
+            localStorage.setItem('crm_projects', JSON.stringify([sampleProject]));
+            localStorage.setItem('crm_tasks', JSON.stringify([sampleTask]));
+            
+            console.log('Sample data created');
+            alert('Sample data created! Please refresh the page or reinitialize the timer.');
+        }
+
+        // Function to test task completion manually
+        function testTaskCompletion() {
+            console.log('Testing task completion...');
+            
+            const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+            const activeTasks = tasks.filter(task => task.status !== 'completed');
+            
+            if (activeTasks.length === 0) {
+                alert('No active tasks found. Please create some tasks first.');
+                return;
+            }
+            
+            const task = activeTasks[0];
+            console.log('Testing completion for task:', task);
+            
+            // Manually complete the task
+            task.actualTime = 1.5;
+            task.status = 'completed';
+            task.completedAt = new Date().toISOString();
+            
+            // Save to localStorage
+            const taskIndex = tasks.findIndex(t => t.id === task.id);
+            if (taskIndex !== -1) {
+                tasks[taskIndex] = task;
+                localStorage.setItem('crm_tasks', JSON.stringify(tasks));
+                console.log('Task manually completed and saved');
+                
+                // Refresh displays
+                if (window.crm && window.crm.render) {
+                    window.crm.render();
+                    window.crm.updateEarningsDisplay();
+                }
+                
+                if (window.simpleTimer) {
+                    window.simpleTimer.updateCompletionLog();
+                    window.simpleTimer.populateTaskDropdown();
+                }
+                
+                alert(`Task "${task.name}" manually completed!\n\nCheck the completion log and task list.`);
+            } else {
+                alert('Error: Task not found for completion');
+            }
+        }
+
+        // Function to test checkbox functionality
+        function testCheckboxFunctionality() {
+            console.log('=== TESTING CHECKBOX FUNCTIONALITY ===');
+            
+            if (typeof crm === 'undefined') {
+                console.log('❌ CRM instance not available');
+                alert('CRM not initialized yet. Please wait for page to load completely.');
+                return;
+            }
+            
+            console.log('✅ CRM instance available');
+            console.log('Tasks count:', crm.tasks.length);
+            
+            // Test task completion toggle
+            const tasks = crm.tasks.filter(task => task.status !== 'completed');
+            if (tasks.length === 0) {
+                alert('No active tasks found. Please create some tasks first.');
+                return;
+            }
+            
+            const testTask = tasks[0];
+            console.log('Testing checkbox for task:', testTask.name, 'Current status:', testTask.status);
+            
+            // Test the toggle function
+            const originalStatus = testTask.status;
+            crm.toggleTaskCompletion(testTask.id);
+            
+            console.log('Task status changed from', originalStatus, 'to', testTask.status);
+            
+            // Check if it worked
+            if (testTask.status !== originalStatus) {
+                alert(`✅ Checkbox test successful!\n\nTask "${testTask.name}" status changed from "${originalStatus}" to "${testTask.status}"\n\nCheck the task list and completion log.`);
+            } else {
+                alert(`❌ Checkbox test failed!\n\nTask "${testTask.name}" status did not change from "${originalStatus}"\n\nCheck the console for errors.`);
+            }
+            
+            console.log('=== END CHECKBOX TEST ===');
+        }
+
+        // Emergency stop function - can be called from console
+        function emergencyStopTimer() {
+            console.log('🚨 EMERGENCY STOP TIMER CALLED!');
+            if (typeof crm !== 'undefined' && crm.stopTimer) {
+                crm.stopTimer();
+                console.log('✅ Emergency stop completed');
+            } else {
+                console.log('❌ CRM or stopTimer method not available');
+            }
+        }
+
+        // Make emergency stop globally available
+        window.emergencyStopTimer = emergencyStopTimer;
+
+        // Simple Working Timer - No Dependencies
+        class SimpleTimer {
+            constructor() {
+                this.isRunning = false;
+                this.isPaused = false;
+                this.startTime = 0;
+                this.pauseTime = 0;
+                this.totalPausedTime = 0;
+                this.interval = null;
+                this.currentTask = null;
+                this.estimatedTime = 0;
+                
+                this.init();
+            }
+            
+            init() {
+                console.log('SimpleTimer initialized');
+                console.log('Setting up event listeners...');
+                this.setupEventListeners();
+                console.log('Populating task dropdown...');
+                this.populateTaskDropdown();
+                console.log('SimpleTimer init complete');
+            }
+            
+            setupEventListeners() {
+                console.log('Setting up event listeners...');
+                
+                const startBtn = document.getElementById('simpleStartBtn');
+                const stopBtn = document.getElementById('simpleStopBtn');
+                const pauseBtn = document.getElementById('simplePauseBtn');
+                
+                console.log('Found buttons:', { startBtn: !!startBtn, stopBtn: !!stopBtn, pauseBtn: !!pauseBtn });
+                
+                if (startBtn) {
+                    startBtn.addEventListener('click', () => {
+                        console.log('Start button clicked');
+                        this.startTimer();
+                    });
+                    console.log('Start button event listener added');
+                } else {
+                    console.error('Start button not found!');
+                }
+                
+                if (stopBtn) {
+                    stopBtn.addEventListener('click', () => {
+                        console.log('Stop button clicked');
+                        this.stopTimer();
+                    });
+                    console.log('Stop button event listener added');
+                } else {
+                    console.error('Stop button not found!');
+                }
+                
+                if (pauseBtn) {
+                    pauseBtn.addEventListener('click', () => {
+                        console.log('Pause button clicked');
+                        this.togglePause();
+                    });
+                    console.log('Pause button event listener added');
+                } else {
+                    console.error('Pause button not found!');
+                }
+                
+                console.log('Event listeners setup complete');
+            }
+            
+            populateTaskDropdown() {
+                const taskSelect = document.getElementById('simpleTaskSelect');
+                if (!taskSelect) return;
+                
+                // Get tasks from localStorage
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
+                
+                taskSelect.innerHTML = '<option value="">Choose a task to track...</option>';
+                
+                tasks.forEach(task => {
+                    if (task.status !== 'completed') {
+                        const project = projects.find(p => p.id === task.projectId);
+                        const projectName = project ? project.name : 'Unknown Project';
+                        
+                        const option = document.createElement('option');
+                        option.value = task.id;
+                        option.textContent = `${task.name} (${projectName})`;
+                        taskSelect.appendChild(option);
+                    }
+                });
+                
+                console.log('Task dropdown populated with', taskSelect.children.length - 1, 'tasks');
+            }
+            
+            startTimer() {
+                console.log('startTimer() called');
+                
+                const taskSelect = document.getElementById('simpleTaskSelect');
+                const estimatedTimeInput = document.getElementById('simpleEstimatedTime');
+                
+                console.log('Found elements:', { taskSelect: !!taskSelect, estimatedTimeInput: !!estimatedTimeInput });
+                
+                if (!taskSelect || !estimatedTimeInput) {
+                    console.error('Timer elements not found');
+                    alert('Timer elements not found');
+                    return;
+                }
+                
+                const selectedTaskId = taskSelect.value;
+                const estimatedTime = parseFloat(estimatedTimeInput.value) || 0;
+                
+                console.log('Selected values:', { selectedTaskId, estimatedTime });
+                
+                if (!selectedTaskId) {
+                    console.error('No task selected');
+                    alert('Please select a task to track');
+                    return;
+                }
+                
+                if (!estimatedTime) {
+                    console.error('No estimated time entered');
+                    alert('Please enter estimated time');
+                    return;
+                }
+                
+                // Get task and project info
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
+                
+                console.log('Found data:', { tasksCount: tasks.length, projectsCount: projects.length });
+                
+                const task = tasks.find(t => t.id === selectedTaskId);
+                const project = projects.find(p => p.id === task.projectId);
+                
+                console.log('Found task and project:', { task: !!task, project: !!project });
+                
+                if (!task) {
+                    console.error('Selected task not found');
+                    alert('Selected task not found');
+                    return;
+                }
+                
+                // Start the timer
+                this.isRunning = true;
+                this.isPaused = false;
+                this.startTime = Date.now();
+                this.totalPausedTime = 0;
+                this.currentTask = task;
+                this.estimatedTime = estimatedTime;
+                
+                console.log('Timer state set:', { 
+                    isRunning: this.isRunning, 
+                    startTime: this.startTime, 
+                    currentTask: this.currentTask.name 
+                });
+                
+                // Start interval
+                this.interval = setInterval(() => {
+                    this.updateDisplay();
+                }, 1000);
+                
+                console.log('Interval started');
+                
+                // Update UI
+                this.updateUI();
+                
+                // Show task info
+                this.showTaskInfo(task, project);
+                
+                console.log('Timer started successfully for task:', task.name);
+            }
+            
+            stopTimer() {
+                if (!this.isRunning) {
+                    alert('No timer running');
+                    return;
+                }
+                
+                console.log('stopTimer called, current task:', this.currentTask);
+                
+                // Calculate total time
+                const totalTime = this.calculateTotalTime();
+                const totalHours = (totalTime / (1000 * 60 * 60)).toFixed(2);
+                
+                console.log('Total time calculated:', totalHours, 'hours');
+                
+                // Stop the timer
+                clearInterval(this.interval);
+                this.isRunning = false;
+                this.isPaused = false;
+                this.interval = null;
+                
+                // Update task
+                if (this.currentTask) {
+                    console.log('Completing task:', this.currentTask.name);
+                    this.completeTask(this.currentTask, totalHours);
+                } else {
+                    console.error('No current task to complete');
+                }
+                
+                // Reset UI
+                this.resetUI();
+                
+                // Show completion message
+                alert(`✅ Task completed!\n\n⏱️ Total time: ${this.formatTimeReadable(totalHours)}\n📝 Task has been marked complete`);
+                
+                console.log('Timer stopped, task completed');
+            }
+            
+            togglePause() {
+                if (!this.isRunning) return;
+                
+                if (this.isPaused) {
+                    // Resume
+                    this.totalPausedTime += Date.now() - this.pauseTime;
+                    this.isPaused = false;
+                } else {
+                    // Pause
+                    this.pauseTime = Date.now();
+                    this.isPaused = true;
+                }
+                
+                this.updateUI();
+                console.log('Timer', this.isPaused ? 'paused' : 'resumed');
+            }
+            
+            updateDisplay() {
+                if (!this.isRunning) return;
+                
+                const totalTime = this.calculateTotalTime();
+                const hours = Math.floor(totalTime / (1000 * 60 * 60));
+                const minutes = Math.floor((totalTime % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((totalTime % (1000 * 60)) / 1000);
+                
+                const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                const timerTime = document.getElementById('simpleTimerTime');
+                if (timerTime) {
+                    timerTime.textContent = timeString;
+                }
+            }
+            
+            // Format time in readable hours and minutes
+            formatTimeReadable(hours) {
+                const wholeHours = Math.floor(hours);
+                const minutes = Math.round((hours - wholeHours) * 60);
+                
+                if (wholeHours === 0) {
+                    return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+                } else if (minutes === 0) {
+                    return `${wholeHours} hour${wholeHours !== 1 ? 's' : ''}`;
+                } else {
+                    return `${wholeHours} hour${wholeHours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+                }
+            }
+            
+            calculateTotalTime() {
+                if (!this.startTime) return 0;
+                
+                const currentTime = this.isPaused ? this.pauseTime : Date.now();
+                return currentTime - this.startTime - this.totalPausedTime;
+            }
+            
+            updateUI() {
+                const startBtn = document.getElementById('simpleStartBtn');
+                const stopBtn = document.getElementById('simpleStopBtn');
+                const pauseBtn = document.getElementById('simplePauseBtn');
+                const status = document.getElementById('simpleTimerStatus');
+                
+                if (this.isRunning) {
+                    if (startBtn) startBtn.style.display = 'none';
+                    if (stopBtn) stopBtn.style.display = 'inline-block';
+                    if (pauseBtn) pauseBtn.style.display = 'inline-block';
+                    if (status) status.textContent = this.isPaused ? 'Timer paused' : 'Timer running...';
+                } else {
+                    if (startBtn) startBtn.style.display = 'inline-block';
+                    if (stopBtn) stopBtn.style.display = 'none';
+                    if (pauseBtn) pauseBtn.style.display = 'none';
+                    if (status) status.textContent = 'Ready to start';
+                }
+            }
+            
+            resetUI() {
+                const timerTime = document.getElementById('simpleTimerTime');
+                const taskInfo = document.getElementById('simpleTaskInfo');
+                
+                if (timerTime) timerTime.textContent = '00:00:00';
+                if (taskInfo) taskInfo.style.display = 'none';
+                
+                this.updateUI();
+            }
+            
+            showTaskInfo(task, project) {
+                const taskInfo = document.getElementById('simpleTaskInfo');
+                const taskName = document.getElementById('simpleTaskName');
+                const projectName = document.getElementById('simpleProjectName');
+                const startTime = document.getElementById('simpleStartTime');
+                const estimated = document.getElementById('simpleEstimated');
+                
+                if (taskInfo) taskInfo.style.display = 'block';
+                if (taskName) taskName.textContent = task.name;
+                if (projectName) projectName.textContent = project ? project.name : 'Unknown Project';
+                if (startTime) startTime.textContent = new Date().toLocaleTimeString();
+                if (estimated) estimated.textContent = this.estimatedTime;
+            }
+            
+            completeTask(task, totalHours) {
+                // Update task
+                task.actualTime = parseFloat(totalHours);
+                task.status = 'completed';
+                task.completedAt = new Date().toISOString();
+                
+                // Save to localStorage
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const taskIndex = tasks.findIndex(t => t.id === task.id);
+                
+                if (taskIndex !== -1) {
+                    tasks[taskIndex] = task;
+                    localStorage.setItem('crm_tasks', JSON.stringify(tasks));
+                }
+                
+                // Update completion log
+                this.updateCompletionLog();
+                
+                // Refresh CRM display if available
+                if (window.crm && window.crm.render) {
+                    window.crm.render();
+                    window.crm.updateEarningsDisplay();
+                }
+                
+                console.log('Task completed and saved:', task.name);
+            }
+            
+            updateCompletionLog() {
+                const completionLog = document.getElementById('completionLog');
+                if (!completionLog) return;
+                
+                const tasks = JSON.parse(localStorage.getItem('crm_tasks') || '[]');
+                const completedTasks = tasks.filter(task => task.status === 'completed');
+                
+                if (completedTasks.length === 0) {
+                    completionLog.innerHTML = `
+                        <div class="empty-state">
+                            <h4>No completed work yet</h4>
+                            <p>Complete tasks to see your work log!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Sort by completion date (newest first)
+                completedTasks.sort((a, b) => {
+                    if (a.completedAt && b.completedAt) {
+                        return new Date(b.completedAt) - new Date(a.completedAt);
+                    }
+                    return 0;
+                });
+                
+                const projects = JSON.parse(localStorage.getItem('crm_projects') || '[]');
+                
+                const logHTML = completedTasks.map((task, index) => {
+                    const project = projects.find(p => p.id === task.projectId);
+                    const projectName = project ? project.name : 'Unknown Project';
+                    
+                    const estimatedTime = task.estimatedTime || 0;
+                    const actualTime = task.actualTime || 0;
+                    const completionDate = task.completedAt ? new Date(task.completedAt).toLocaleDateString() : 'Unknown';
+                    const completionTime = task.completedAt ? new Date(task.completedAt).toLocaleTimeString() : '';
+                    
+                    // Check if task was completed in the last 24 hours
+                    const isRecent = task.completedAt && (Date.now() - new Date(task.completedAt).getTime()) < 24 * 60 * 60 * 1000;
+                    
+                    return `
+                        <div class="completion-log-item ${isRecent ? 'recent-completion' : ''}">
+                            <div class="completion-log-header">
+                                <div>
+                                    <div class="completion-task-name">
+                                        ${task.name}
+                                        ${isRecent ? '<span class="new-badge">🆕 New!</span>' : ''}
+                                    </div>
+                                    <div class="completion-project-name">${projectName}</div>
+                                </div>
+                                <div class="completion-date">
+                                    <div>${completionDate}</div>
+                                    <div class="completion-time">${completionTime}</div>
+                                </div>
+                            </div>
+                            <div class="completion-time-info">
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Estimated Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(estimatedTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Actual Time</span>
+                                    <span class="time-info-value">${this.formatTimeReadable(actualTime)}</span>
+                                </div>
+                                <div class="time-info-item">
+                                    <span class="time-info-label">Difference</span>
+                                    <span class="time-info-value ${actualTime > estimatedTime ? 'over-estimate' : 'under-estimate'}">
+                                        ${this.formatTimeReadable(Math.abs(actualTime - estimatedTime))}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                completionLog.innerHTML = logHTML;
+                console.log('Completion log updated with', completedTasks.length, 'completed tasks');
+            }
+        }
     </script>
 </body>
 </html>
